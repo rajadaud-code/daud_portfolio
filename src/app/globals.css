@@ -94,19 +94,33 @@
 }
 
 /*
- * TODO (post-Phase 7): dark mode. The PRD scopes this as "future", so nothing
- * ships enabled — but the seam exists. Enabling it means filling this block and
- * adding a theme toggle that stamps [data-theme] on <html>. No component changes.
- *
- * [data-theme="dark"] {
- *   --canvas: var(--neutral-950);
- *   --ink: var(--neutral-50);
- *   ...
- * }
- *
- * Deliberately NOT wired to @media (prefers-color-scheme: dark): a half-built
- * dark theme must not activate itself on a user's OS setting.
+ * DARK MODE THEME OVERRIDES
+ * Applies when [data-theme="dark"] or .dark is set on <html>.
  */
+[data-theme="dark"],
+.dark {
+  --canvas: #09090b;
+  --surface: #121215;
+  --surface-raised: #1c1c21;
+
+  --ink: #f4f4f5;
+  --ink-muted: #a1a1aa;
+  --ink-subtle: #71717a;
+  --ink-inverse: #09090b;
+
+  --line: #27272a;
+  --line-strong: #3f3f46;
+
+  --accent: #3b82f6;
+  --accent-hover: #60a5fa;
+  --accent-subtle: #1e293b;
+  --accent-contrast: #ffffff;
+
+  --shadow-rgb: 0 0 0;
+
+  --glass-bg: color-mix(in srgb, #09090b 75%, transparent);
+  --glass-line: color-mix(in srgb, #27272a 70%, transparent);
+}
 
 /* ============================================================================
    LAYER 3 — TAILWIND THEME

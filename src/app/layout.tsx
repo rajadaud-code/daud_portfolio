@@ -61,6 +61,20 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var saved = localStorage.getItem('theme');
+                  var theme = saved || 'light';
+                  document.documentElement.setAttribute('data-theme', theme);
+                  if (theme === 'dark') document.documentElement.classList.add('dark');
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
         {/*
           Framer Motion renders an element's `initial` state into the SSR HTML.
           For the masked hero headline that means transform:translateY(110%) —

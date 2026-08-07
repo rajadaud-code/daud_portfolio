@@ -6,7 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useState } from "react";
 
-import { Container } from "@/components/ui";
+import { Container, ThemeToggle } from "@/components/ui";
 import { navigation, site } from "@/content";
 import { useScrollDirection } from "@/hooks";
 import { DURATION, EASE, TRANSITION } from "@/lib/motion";
@@ -104,35 +104,45 @@ export function Navbar() {
             {site.name}
           </Link>
 
-          <ul role="list" className="hidden items-center gap-1 md:flex">
-            {navigation.map((item) => (
-              <li key={item.href}>
-                <NavLink
-                  href={item.href}
-                  label={item.label}
-                  isActive={pathname === item.href}
-                  animateIndicator={!shouldReduceMotion}
-                />
-              </li>
-            ))}
-          </ul>
+          <div className="hidden items-center gap-3 md:flex">
+            <ul role="list" className="flex items-center gap-1">
+              {navigation.map((item) => (
+                <li key={item.href}>
+                  <NavLink
+                    href={item.href}
+                    label={item.label}
+                    isActive={pathname === item.href}
+                    animateIndicator={!shouldReduceMotion}
+                  />
+                </li>
+              ))}
+            </ul>
 
-          <button
-            type="button"
-            // aria-expanded + aria-controls are what make this a disclosure
-            // rather than a mystery icon.
-            aria-expanded={isMenuOpen}
-            aria-controls={menuId}
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            onClick={toggleMenu}
-            className="-mr-2 inline-flex size-11 items-center justify-center rounded-control text-ink transition-colors hover:bg-surface md:hidden"
-          >
-            {isMenuOpen ? (
-              <X className="size-5" aria-hidden="true" />
-            ) : (
-              <Menu className="size-5" aria-hidden="true" />
-            )}
-          </button>
+            <div className="ml-2 border-l border-line pl-3">
+              <ThemeToggle />
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 md:hidden">
+            <ThemeToggle />
+
+            <button
+              type="button"
+              // aria-expanded + aria-controls are what make this a disclosure
+              // rather than a mystery icon.
+              aria-expanded={isMenuOpen}
+              aria-controls={menuId}
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              onClick={toggleMenu}
+              className="inline-flex size-11 items-center justify-center rounded-control text-ink transition-colors hover:bg-surface"
+            >
+              {isMenuOpen ? (
+                <X className="size-5" aria-hidden="true" />
+              ) : (
+                <Menu className="size-5" aria-hidden="true" />
+              )}
+            </button>
+          </div>
         </nav>
       </Container>
 

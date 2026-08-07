@@ -35,3 +35,5 @@ export type { PageHeaderProps } from "./page-header";
 
 export { CopyEmailButton } from "./copy-email-button";
 export type { CopyEmailButtonProps } from "./copy-email-button";
+
+export { ThemeToggle } from "./theme-toggle";
