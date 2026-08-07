@@ -23,6 +23,43 @@ export const certifications: Certification[] = [
       height: 710,
     },
   },
+  {
+    slug: "ai-fluency-framework-foundations",
+    title: "AI Fluency: Framework & Foundations",
+    issuer: "Anthropic",
+    verifyUrl: "https://verify.skilljar.com/c/dnb336vsnnqp",
+    image: {
+      src: "/certifications/ai-fluency-framework-foundations.png",
+      alt: "AI Fluency: Framework & Foundations Certificate of Completion awarded to Muhammad Daud Israr by Anthropic",
+      width: 832,
+      height: 627,
+    },
+  },
+  {
+    slug: "huawei-cloud-developer-certification-hccda-ai",
+    title: "Huawei Cloud Developer Certification (HCCDA-AI)",
+    issuer: "Huawei",
+    verifyUrl: "/certifications/huawei-hccda-ai.png",
+    image: {
+      src: "/certifications/huawei-hccda-ai.png",
+      alt: "Huawei Cloud Developer Certification (HCCDA-AI) Certificate of Completion awarded to Muhammad Daud Israr",
+      width: 906,
+      height: 634,
+    },
+  },
+  {
+    slug: "python-programming-den",
+    title: "Python Programming",
+    issuer: "Digital Empowerment Network",
+    verifyUrl: "/certifications/python-programming-den.png",
+    issued: "2024-08",
+    image: {
+      src: "/certifications/python-programming-den.png",
+      alt: "Python Programming Certificate of Completion awarded to Muhammad Daud Israr by Digital Empowerment Network",
+      width: 950,
+      height: 675,
+    },
+  },
 
   /* --------------------------------------------------------------------------
    * TODO (content): certifications 2–4 are "Placeholder" in the PRD.

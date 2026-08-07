@@ -36,7 +36,7 @@ export const site: SiteConfig = {
    * Until then the download control renders disabled — never as a dead link.
    */
   resume: {
-    href: null,
+    href: "/resume/muhammad-daud-israr-resume.pdf",
     filename: "muhammad-daud-israr-resume.pdf",
   },
 

@@ -356,6 +356,18 @@ export default function AboutPage() {
                 </ButtonLink>
 
                 <CopyEmailButton size="lg" />
+
+                {site.resume.href ? (
+                  <ButtonLink
+                    href={site.resume.href}
+                    variant="ghost"
+                    size="lg"
+                    download={site.resume.filename}
+                    leadingIcon={<Download className="size-4" />}
+                  >
+                    Resume
+                  </ButtonLink>
+                ) : null}
               </div>
             </div>
           </Reveal>

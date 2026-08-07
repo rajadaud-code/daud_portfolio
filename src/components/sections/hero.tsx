@@ -51,7 +51,7 @@ export function Hero() {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="pt-16 pb-stack md:pt-24 lg:pt-32"
+      className="pt-2 pb-stack md:pt-24 lg:pt-4"
     >
       <Container>
         <div
