@@ -37,7 +37,7 @@ export const cardVariants = cva(
 
 export interface CardProps
   extends ComponentProps<"div">,
-    VariantProps<typeof cardVariants> {}
+  VariantProps<typeof cardVariants> { }
 
 /**
  * Card — a surface. It is not a link and has no onClick.

@@ -270,11 +270,10 @@ export default function AboutPage() {
                   <Reveal as="li" key={entry.slug} className="relative pl-10 md:pl-14">
                     <span
                       aria-hidden="true"
-                      className={`absolute left-0 top-0.5 size-3.5 rounded-full border-2 ${
-                        isCurrent
+                      className={`absolute left-0 top-0.5 size-3.5 rounded-full border-2 ${isCurrent
                           ? "border-accent bg-accent ring-4 ring-accent-subtle"
                           : "border-line-strong bg-canvas"
-                      }`}
+                        }`}
                     />
 
                     <div className="flex flex-wrap items-center gap-x-3 gap-y-2">

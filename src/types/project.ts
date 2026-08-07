@@ -1,14 +1,5 @@
 import type { OptionalImageAsset } from "./media";
 
-/**
- * A single technology label, e.g. "FastAPI".
- *
- * Kept as a plain string rather than a closed union: the Projects page filters
- * are derived from the tech actually present across projects (see
- * `getAllTech()` in content/projects.ts), so adding a project with a new stack
- * extends the filter set automatically. A union would force a type edit for
- * every new tool Daud picks up — friction with no payoff.
- */
 export type TechTag = string;
 
 export interface ProjectLinks {
@@ -36,46 +27,43 @@ export interface EngineeringChallenge {
   solution: string;
 }
 
-/**
- * Long-form content for the Projects page case-study layout.
- */
+export interface ProjectMetric {
+  label: string;
+  value: string;
+  hint?: string;
+}
+
+export interface EngineeringTradeoff {
+  decision: string;
+  choice: string;
+  why: string;
+}
+
 export interface ProjectCaseStudy {
-  /** The problem in detail. */
+  metrics?: ProjectMetric[];
+  aiPipelineType?: "rag" | "agent" | "architecture";
   problem: string;
-  /** Overall engineering approach. */
   approach: string;
-  /** System architecture overview. */
   architecture: string;
-  /** Key architecture nodes for the diagram visualizer. */
   architectureNodes?: ArchitectureNode[];
-  /** Detailed implementation notes and key code highlights. */
+  tradeoffs?: EngineeringTradeoff[];
   implementation: string[];
-  /** Technical challenges and engineering solutions applied. */
   challenges: EngineeringChallenge[];
-  /** Outcome and quantifiable metrics. */
   outcome: string;
-  /** Key highlights worth defending in an engineering interview. */
   highlights?: string[];
-  /** Future improvements and architectural roadmap. */
   futureImprovements?: string[];
 }
 
 export interface Project {
-  /** URL-safe id. Also the React key and the case-study route segment. */
   slug: string;
   title: string;
   category: ProjectCategory;
-  /** One or two lines. Shown on the card. */
   description: string;
   tech: TechTag[];
   links: ProjectLinks;
-  /**
-   * Card image. `null` until the asset is supplied — see OptionalImageAsset.
-   */
   thumbnail: OptionalImageAsset;
-  /** Surfaces this project in the homepage featured grid. */
+  images?: OptionalImageAsset[];
   featured: boolean;
-  /** Ordering hint within the featured grid. Lower renders first. */
   order: number;
   caseStudy?: ProjectCaseStudy;
 }

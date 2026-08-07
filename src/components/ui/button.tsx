@@ -69,7 +69,7 @@ type ButtonBaseProps = VariantProps<typeof buttonVariants> & {
 
 export interface ButtonProps
   extends Omit<ComponentProps<"button">, "color">,
-    ButtonBaseProps {
+  ButtonBaseProps {
   /** Swaps the leading icon for a spinner and disables interaction. */
   isLoading?: boolean;
 }
@@ -118,7 +118,7 @@ export function Button({
 
 export interface ButtonLinkProps
   extends Omit<ComponentProps<typeof Link>, "color">,
-    ButtonBaseProps {}
+  ButtonBaseProps { }
 
 /**
  * ButtonLink — navigation that looks like a button.

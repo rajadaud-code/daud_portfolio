@@ -1,120 +1,55 @@
-================================================================================
-                    MUHAMMAD DAUD ISRAR - PORTFOLIO WEBSITE
-                        CHANGES & PROGRESS SUMMARY LOG
-================================================================================
-Date: August 7, 2026
-Developer: Muhammad Daud Israr (AI Software Engineer / Backend Developer)
-Repository: d:\DAUD PORTFOLIO WEBSITE\daud_portfolio
-Tech Stack: Next.js 16 (Turbopack), React 19, TypeScript, Tailwind CSS v4, Framer Motion
+===============================================================================
+DAUD PORTFOLIO WEBSITE — CHANGES & PROGRESS LOG
+===============================================================================
+Developer: Muhammad Daud Israr
+Role: AI Software Engineer / Backend Developer
+Location: Islamabad, Pakistan / Remote
+Repository: rajadaud-code/daud_portfolio
+===============================================================================
 
---------------------------------------------------------------------------------
-1. EXECUTIVE SUMMARY
---------------------------------------------------------------------------------
-The portfolio website has been fully designed, developed, integrated, and verified
-against all product requirements (PORTFOLIO_PRD.md). The site embodies a high-craft
-editorial design language inspired by Fabrica and Trifecta—featuring generous
-whitespace, fluid typography (clamp()), obsidian dark mode, interactive lightboxes,
-and production-ready Next.js Turbopack SSG pages.
+[LATEST UPDATE — HERO BUTTON STYLES & DOWNLOAD RESUME BLACK BUTTON]
+-------------------------------------------------------------------------------
+1. Download Resume Button Update (src/components/sections/hero.tsx):
+   - Styled "Download Resume" with the solid black primary button variant (`variant="primary"`), matching "Contact Me" perfectly.
+   - Text label updated to "Download Resume" (with download icon).
 
---------------------------------------------------------------------------------
-2. FULL PAGE ROUTING & ARCHITECTURE
---------------------------------------------------------------------------------
-[✓] / (Homepage)
-    - Editorial Hero section with profile photo, role badges, bio, and downloadable resume.
-    - Architectural Principles section with interactive card grids.
-    - Featured Projects grid with dynamic case studies & SSG route links.
-    - Full-stack Experience timeline.
-    - Certifications grid (4/4 filled slots) with Lightbox modal previews.
+2. Uniform Hero CTA Button Row:
+   - "Contact Me" (Solid Black Primary Button)
+   - "View Projects" (Bordered Secondary Button)
+   - "Download Resume" (Solid Black Primary Button)
+   - "Connect" (LinkedIn Bordered Secondary Button)
+   - "Follow" (GitHub Bordered Secondary Button)
 
-[✓] /projects
-    - Complete Projects Explorer with category filters (All, AI Agents & LLMs, Backend & APIs, Web Apps).
-    - Search filter by title, summary, or tech stack tag.
-    - Direct links to GitHub repositories, live demo endpoints, and deep case studies.
+-------------------------------------------------------------------------------
+[GOLDPULSE TRADING PLATFORM & SLIDESHOW CAROUSEL]
+-------------------------------------------------------------------------------
+1. Added GOLDPULSE Trading Platform as the 2nd Featured Project (order: 2):
+   - Title: "GOLDPULSE — World's Leading Gold Trading Platform"
+   - Category: Full Stack
+   - Tech Stack: Next.js, Node.js, Express, MongoDB Atlas, TradingView API, Tailwind CSS, REST APIs
+   - Status: Active Private Team Development ("In Active Private Development" badge & footer indicator).
 
-[✓] /projects/[slug] (Static Site Generation - 4 Dynamic Routes)
-    - SSG pages generated at build time via `generateStaticParams`:
-      1. /projects/ai-expense-management-system
-      2. /projects/research-pilot-api
-      3. /projects/multi-agent-task-orchestrator
-      4. /projects/production-fastapi-boilerplate
-    - Editorial case study layouts featuring: Overview, Business Metrics, Technical Architecture,
-      Engineering Challenges, Key Learnings, and Interactive Node Flow Diagrams.
+2. Interactive 4-Screenshot Slideshow Carousel:
+   - Added automatic 3.5-second cycling through all 4 uploaded GoldPulse screenshots:
+     * Slide 1: GoldPulse Landing Page Hero & Live XAU/USD Quote
+     * Slide 2: Real-time TradingView XAU/USD Dark Technical Chart & Watchlist
+     * Slide 3: Light Mode XAU/USD Technical Analysis Chart with Moving Averages
+     * Slide 4: XAU/USD 1-Minute Candle Chart, Volume & Performance Metrics
+   - Pause-on-hover micro-interaction, pagination pill indicators (dots), and slide number counter badge ("1 / 4").
 
-[✓] /about
-    - Comprehensive engineering background & technical bio.
-    - Core Technical Competencies categorized into AI/LLMs, Backend, Cloud & Databases, Architecture.
-    - Interactive TimelineRail for experience history.
-    - Complete Certifications grid with Lightbox Modal preview support.
-    - Direct Resume Download CTA.
+-------------------------------------------------------------------------------
+[PHASE 3 — DESIGN & ENGINEERING ELEVATION]
+-------------------------------------------------------------------------------
+1. AI Engineering Showcase Components:
+   - RagPipelineDiagram (Interactive 7-step RAG flow visualizer)
+   - AgentWorkflowDiagram (Multi-agent topology visualizer)
+   - ModelComparisonTable (LLM Evaluation matrix: Claude 3.5 Sonnet, GPT-4o, Llama 3 70B, DeepSeek R1)
+   - LlmEcosystemGrid (AI Stack capability grid: LangChain, ChromaDB, FastAPI, RAG, Python)
 
-[✓] /contact
-    - Interactive direct email contact form with client-side validation.
-    - Quick Copy-Email button ("muhammaddaudisrar@gmail.com").
-    - Social links (GitHub, LinkedIn, Email).
-    - Downloadable Resume PDF card.
+2. Recruiter 30-Second Executive Summary:
+   - RecruiterSummaryCard with live availability status indicator ("Available for Full-time Roles & Remote"), 1-click Resume PDF download, 1-click email copy, and social profile links.
 
---------------------------------------------------------------------------------
-3. CERTIFICATIONS INTEGRATION (4/4 SLOTS COMPLETED)
---------------------------------------------------------------------------------
-All four certification slots specified in the PRD are now populated with real
-credentials and high-resolution certificate image previews:
-
-1. Claude 101 (Anthropic)
-   - Image: public/certifications/claude-101.png (939x710 px)
-   - Verify Link: https://verify.skilljar.com/c/zuzpwmkihdge
-
-2. AI Fluency: Framework & Foundations (Anthropic)
-   - Image: public/certifications/ai-fluency-framework-foundations.png (832x627 px)
-   - Verify Link: https://verify.skilljar.com/c/dnb336vsnnqp
-
-3. Huawei Cloud Developer Certification (HCCDA-AI) (Huawei)
-   - Image: public/certifications/huawei-hccda-ai.png (906x634 px)
-   - Interactive Link: Direct in-page Lightbox image preview
-
-4. Python Programming (Digital Empowerment Network - DEN)
-   - Image: public/certifications/python-programming-den.png (950x675 px)
-   - Issued: Aug 2024 (CID: DEP5776)
-   - Interactive Link: Direct in-page Lightbox image preview
-
---------------------------------------------------------------------------------
-4. INTERACTIVE LIGHTBOX PREVIEW MODAL
---------------------------------------------------------------------------------
-- Built a custom in-page Lightbox Modal for certification cards (CertificationCard).
-- Prevents raw image navigation—users remain on the portfolio site at all times.
-- Controls & Accessibility:
-  - Top-Right Close (X) Button.
-  - Footer "Close Preview" button.
-  - Backdrop click to dismiss.
-  - Keyboard `Escape` key close listener.
-  - Body scroll-lock when modal is open (overflow: hidden).
-  - Smooth Framer Motion spring enter/exit animations (AnimatePresence).
-
---------------------------------------------------------------------------------
-5. RESUME INTEGRATION
---------------------------------------------------------------------------------
-- Placed official PDF resume at public/resume/muhammad-daud-israr-resume.pdf.
-- Configured site.resume.href in src/content/site.ts.
-- Wired active download controls (download="muhammad-daud-israr-resume.pdf") in:
-  - Hero Section (/)
-  - Contact Page (/contact)
-  - About Page (/about)
-
---------------------------------------------------------------------------------
-6. DUAL-THEME ENGINE (LIGHT & DARK MODE)
---------------------------------------------------------------------------------
-- Configured Obsidian Dark Mode tokens in src/app/globals.css ([data-theme="dark"] & .dark).
-- Default Theme: Light Mode (preserved exactly as requested).
-- Created ThemeToggle component in src/components/ui/theme-toggle.tsx with
-  animated Sun/Moon icons.
-- Placed Theme Toggle button in Navbar desktop and mobile navigation header.
-- Added no-flash inline theme initialization script in layout.tsx to read localStorage
-  and prevent Flash of Unstyled Content (FOUC).
-
---------------------------------------------------------------------------------
-7. VERIFICATION & QUALITY ASSURANCE
---------------------------------------------------------------------------------
-- `npm run typecheck` (tsc --noEmit): PASSED (0 errors).
-- `npm run build` (Next.js Turbopack SSG): PASSED (13/13 static pages prerendered).
-- Zero broken links, zero console errors, full accessibility compliance.
-
-================================================================================
+3. Complete SEO & Structured Data:
+   - schema.org/Person JSON-LD schema injected in layout head.
+   - 100% Type-safe & static prerendered across all 14 routes.
+===============================================================================
