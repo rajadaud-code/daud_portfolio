@@ -1,26 +1,426 @@
 @import "tailwindcss";
 
+/* ============================================================================
+   LAYER 1 — RAW PALETTE
+   Primitive values. Never referenced by components directly; only the semantic
+   layer below may read these. Renaming a shade must not touch a single .tsx.
+   ========================================================================== */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --neutral-0: #ffffff;
+  --neutral-50: #fafafa;
+  --neutral-100: #f5f5f5;
+  --neutral-200: #e5e5e5;
+  --neutral-300: #d4d4d4;
+  --neutral-400: #a3a3a3;
+  --neutral-500: #737373;
+  --neutral-600: #525252;
+  --neutral-700: #404040;
+  --neutral-800: #262626;
+  --neutral-900: #171717;
+  --neutral-950: #0a0a0a;
+
+  /* The single accent permitted by the PRD. */
+  --blue-50: #eff6ff;
+  --blue-500: #3b82f6;
+  --blue-600: #2563eb;
+  --blue-700: #1d4ed8;
 }
+
+/* ============================================================================
+   LAYER 2 — SEMANTIC TOKENS (light theme = default)
+   Components speak only this vocabulary: bg-canvas, text-ink, border-line.
+   Dark mode is then a remap of this block alone — see the placeholder below.
+   ========================================================================== */
+
+:root {
+  --canvas: var(--neutral-0);
+  --surface: var(--neutral-50);
+  --surface-raised: var(--neutral-100);
+
+  --ink: var(--neutral-950);
+  --ink-muted: var(--neutral-600);
+  --ink-subtle: var(--neutral-500);
+  --ink-inverse: var(--neutral-0);
+
+  --line: var(--neutral-200);
+  --line-strong: var(--neutral-300);
+
+  --accent: var(--blue-600);
+  --accent-hover: var(--blue-700);
+  --accent-subtle: var(--blue-50);
+  --accent-contrast: var(--neutral-0);
+
+  /* --------------------------------------------------------------------------
+     ELEVATION
+     Channel, not decoration. On a white editorial canvas the hairline border
+     does the separating and the shadow only implies height — which is why
+     these are far softer than a default Tailwind `shadow-lg`. Apple, Linear
+     and Vercel all sit in this range on light backgrounds; anything heavier
+     immediately reads as Bootstrap.
+
+     Large blur + large negative spread = a wide, diffuse contact shadow rather
+     than a dark halo hugging the element.
+
+     Held as a channel (`10 10 10`) so the alpha varies per step and a future
+     dark theme can swap to pure black without touching the four ramps.
+     ------------------------------------------------------------------------ */
+  --shadow-rgb: 10 10 10;
+
+  --elevation-hairline: 0 1px 2px rgb(var(--shadow-rgb) / 0.04);
+  --elevation-card: 0 1px 3px rgb(var(--shadow-rgb) / 0.04),
+    0 10px 30px -10px rgb(var(--shadow-rgb) / 0.09);
+  --elevation-lifted: 0 2px 6px rgb(var(--shadow-rgb) / 0.05),
+    0 20px 48px -14px rgb(var(--shadow-rgb) / 0.14);
+  --elevation-overlay: 0 24px 64px -16px rgb(var(--shadow-rgb) / 0.18);
+
+  /* --------------------------------------------------------------------------
+     GLASS
+     Scoped deliberately narrow — see the .glass utility below.
+     ------------------------------------------------------------------------ */
+  --glass-bg: color-mix(in srgb, var(--canvas) 72%, transparent);
+  --glass-line: color-mix(in srgb, var(--line) 70%, transparent);
+
+  /* --------------------------------------------------------------------------
+     DURATIONS
+     Mirrors DURATION in src/lib/motion.ts — CSS transitions and Framer springs
+     must feel like one product. Tailwind v4 has no --duration-* theme
+     namespace, so these stay plain custom properties consumed by the utilities
+     below and by duration-[var(--duration-fast)] where a utility needs them.
+     ------------------------------------------------------------------------ */
+  --duration-fast: 200ms;
+  --duration-base: 400ms;
+  --duration-slow: 700ms;
+}
+
+/*
+ * TODO (post-Phase 7): dark mode. The PRD scopes this as "future", so nothing
+ * ships enabled — but the seam exists. Enabling it means filling this block and
+ * adding a theme toggle that stamps [data-theme] on <html>. No component changes.
+ *
+ * [data-theme="dark"] {
+ *   --canvas: var(--neutral-950);
+ *   --ink: var(--neutral-50);
+ *   ...
+ * }
+ *
+ * Deliberately NOT wired to @media (prefers-color-scheme: dark): a half-built
+ * dark theme must not activate itself on a user's OS setting.
+ */
+
+/* ============================================================================
+   LAYER 3 — TAILWIND THEME
+   `inline` makes utilities compile to var(--ink) rather than a frozen value,
+   so a runtime theme swap on :root propagates without a rebuild.
+   ========================================================================== */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-subtle: var(--ink-subtle);
+  --color-ink-inverse: var(--ink-inverse);
+
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-subtle: var(--accent-subtle);
+  --color-accent-contrast: var(--accent-contrast);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* shadow-hairline / shadow-card / shadow-lifted / shadow-overlay */
+  --shadow-hairline: var(--elevation-hairline);
+  --shadow-card: var(--elevation-card);
+  --shadow-lifted: var(--elevation-lifted);
+  --shadow-overlay: var(--elevation-overlay);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ----------------------------------------------------------------------------
+   TYPE SCALE — editorial, fluid
+   Custom names only. Tailwind's built-in text-sm/base/lg are left untouched so
+   the defaults stay predictable for body copy.
+   clamp() means no per-breakpoint font-size overrides anywhere in the markup.
+   -------------------------------------------------------------------------- */
+
+@theme {
+  /* Hero only. One per page, maximum. */
+  --text-display: clamp(3.25rem, 13vw, 11rem);
+  --text-display--line-height: 0.85;
+  --text-display--letter-spacing: -0.045em;
+  --text-display--font-weight: 600;
+
+  --text-h1: clamp(2.5rem, 7vw, 5rem);
+  --text-h1--line-height: 0.95;
+  --text-h1--letter-spacing: -0.035em;
+  --text-h1--font-weight: 600;
+
+  --text-h2: clamp(2rem, 4.5vw, 3.5rem);
+  --text-h2--line-height: 1;
+  --text-h2--letter-spacing: -0.03em;
+  --text-h2--font-weight: 600;
+
+  --text-h3: clamp(1.375rem, 2.5vw, 2rem);
+  --text-h3--line-height: 1.15;
+  --text-h3--letter-spacing: -0.02em;
+  --text-h3--font-weight: 500;
+
+  /* Sub-headline / intro paragraphs. */
+  --text-lead: clamp(1.125rem, 1.6vw, 1.375rem);
+  --text-lead--line-height: 1.55;
+  --text-lead--letter-spacing: -0.01em;
+
+  /* Eyebrows, section numbers, tech chips. Pairs with font-mono. */
+  --text-label: 0.75rem;
+  --text-label--line-height: 1.2;
+  --text-label--letter-spacing: 0.12em;
+  --text-label--font-weight: 500;
+
+  /* ------------------------------------------------------------------------
+     SPACING RHYTHM
+     Named, fluid steps for page structure — py-section, px-gutter, gap-stack.
+     Tailwind's numeric scale (p-4, gap-2) still handles component-internal
+     spacing. The split keeps macro layout consistent without banning p-4.
+
+     NAMING CONSTRAINT — read before adding a token here.
+
+     Every --spacing-* key becomes a *value* in every spacing namespace,
+     including `inline-*`, which maps to inline-size. So a token named `x`
+     generates `.inline-x { inline-size: ... }`. If `inline-x` is also a core
+     Tailwind utility, the two rules collide on the same class name and the
+     generated one wins on source order.
+
+     This step was called `block`, which produced:
+
+         .inline-block { display: inline-block }        <- Tailwind core
+         .inline-block { inline-size: var(--spacing-block) }  <- from the token
+
+     i.e. every `inline-block` element on the site was silently 80px wide. It
+     shipped that way: the hero's masked headline is built from inline-block
+     spans, so "AI Software Engineer" rendered as "A S E" — each word clipped
+     to the first letter — and read as a font quirk rather than a name clash.
+
+     So: never name a spacing step after the suffix of a core display utility
+     (block, flex, grid, table). `gutter`, `stack` and `section` are safe;
+     `.inline-gutter` and friends collide with nothing.
+     ---------------------------------------------------------------------- */
+  --spacing-gutter: clamp(1.5rem, 5vw, 4rem);
+  --spacing-stack: clamp(2.5rem, 6vw, 5rem);
+  --spacing-section: clamp(6rem, 12vw, 11rem);
+
+  /* max-w-page (full editorial width) / max-w-prose-editorial (reading measure) */
+  --container-page: 90rem;
+  --container-prose-editorial: 44rem;
+
+  /* ------------------------------------------------------------------------
+     MOTION
+     Mirrored in src/lib/motion.ts. CSS hover transitions and Framer Motion
+     springs must feel like the same product, so both read one definition.
+     ---------------------------------------------------------------------- */
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-entrance: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* ------------------------------------------------------------------------
+     BORDER RADIUS
+     Named by the thing it wraps, not by size — `rounded-card` survives a
+     redesign that `rounded-lg` does not.
+
+     Tailwind's numeric radii (rounded-sm/md/lg) are left intact for
+     one-off internal details.
+     ---------------------------------------------------------------------- */
+  --radius-control: 0.625rem; /* buttons, inputs, chips */
+  --radius-card: 1rem; /* project + certification cards */
+  --radius-panel: 1.5rem; /* large surfaces, media frames */
+  --radius-pill: 9999px; /* tags, filter toggles */
+
+  /* ------------------------------------------------------------------------
+     LOADING
+     `shimmer` sweeps a highlight across a skeleton. Deliberately slow (1.8s):
+     a fast shimmer reads as urgency, which is the opposite of what a
+     placeholder should communicate.
+     ---------------------------------------------------------------------- */
+  --animate-shimmer: shimmer 1.8s ease-in-out infinite;
+
+  @keyframes shimmer {
+    0% {
+      background-position: 100% 0;
+    }
+    100% {
+      background-position: -100% 0;
+    }
   }
 }
 
+/* ============================================================================
+   BASE
+   ========================================================================== */
+
+html {
+  /* PRD: smooth scrolling. Overridden for reduced-motion users below. */
+  scroll-behavior: smooth;
+  /* Keeps anchor targets clear of the sticky nav (Phase 2). */
+  scroll-padding-top: 6rem;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  /* Editorial type is set tight; kerning and ligatures earn their keep here. */
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern", "liga";
+}
+
+::selection {
+  background-color: var(--accent);
+  color: var(--accent-contrast);
+}
+
+/* One focus style for the whole site. :focus-visible keeps it off mouse clicks
+   while remaining fully present for keyboard users. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ============================================================================
+   UTILITIES
+   ========================================================================== */
+
+/*
+ * .glass — translucent blur.
+ *
+ * ONE legitimate use on this site: the sticky nav, so editorial type can scroll
+ * under it without colliding. That is why this is a single narrow utility and
+ * not a "glass system".
+ *
+ * Glass earns its keep when there is something worth seeing through it. On a
+ * white canvas over white sections, a blurred white panel is visually identical
+ * to an opaque white panel — it costs a compositor layer and buys nothing.
+ * Apple and Linear use it exactly where content passes beneath. Everywhere
+ * else, a hairline border is the honest answer.
+ *
+ * backdrop-filter is also genuinely expensive: it forces the element onto its
+ * own layer and re-filters on every scroll frame. One per page is a budget.
+ */
+@utility glass {
+  background-color: var(--glass-bg);
+  border-color: var(--glass-line);
+
+  /* Fallback first: without backdrop-filter support, translucency over
+     scrolling text is unreadable — so go opaque rather than pretty. */
+  @supports not (backdrop-filter: blur(1px)) {
+    background-color: var(--canvas);
+  }
+
+  @supports (backdrop-filter: blur(1px)) {
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+  }
+}
+
+/*
+ * .skeleton — loading placeholder fill.
+ *
+ * The shimmer is a gradient sweep on background-position rather than a moving
+ * pseudo-element: it animates a single compositable property, so a grid of
+ * twenty skeletons costs one paint instead of twenty.
+ *
+ * Reduced-motion users get the flat --surface base with no sweep, handled by
+ * the global rule below.
+ */
+@utility skeleton {
+  background-color: var(--surface);
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--surface-raised) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  background-repeat: no-repeat;
+  animation: var(--animate-shimmer);
+}
+
+/*
+ * .hover-lift — the one hover treatment for elevated, clickable surfaces.
+ *
+ * Centralised so every card lifts by the same 2px over the same 400ms. The
+ * transform is a translate (compositor-only, no layout) and the shadow swap
+ * sells the height.
+ *
+ * Gated behind @media (hover: hover): on touch, :hover sticks after tap and
+ * leaves the card stuck in its lifted state until you tap elsewhere.
+ */
+@utility hover-lift {
+  transition:
+    transform var(--duration-base, 400ms) var(--ease-editorial),
+    box-shadow var(--duration-base, 400ms) var(--ease-editorial);
+
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--elevation-lifted);
+    }
+  }
+}
+
+/* ============================================================================
+   REDUCED MOTION
+   Honoured once, globally. Framer Motion reads the same signal via
+   useReducedMotion(), so components never re-implement this check.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /*
+   * The rule above only governs CSS animation. Framer's reveals are inline
+   * styles driven by JS, and they fail here in a way that is invisible in
+   * review and catastrophic in use:
+   *
+   * Framer renders an element's `initial` state into the SSR HTML as
+   * `style="opacity:0;transform:translateY(16px)"`. The primitives then branch
+   * on useReducedMotion() and render a *plain* tag instead of a motion one —
+   * but that hook can only be true in the browser, so the server always emits
+   * the motion element with its hiding style, and the client then renders a
+   * different tree. React does not patch mismatched attributes during
+   * hydration: the server's `opacity:0` survives, nothing ever animates it
+   * away, and the content is gone.
+   *
+   * Measured in headless Chrome before this rule existed: under
+   * prefers-reduced-motion the entire featured projects grid and the hero's
+   * subheading and CTAs sat at opacity 0 permanently — the reveal's own
+   * docstring calls this out ("a reveal that never runs because opacity is
+   * stuck at 0 is an invisible page") and it was happening anyway.
+   *
+   * An author `!important` beats a non-important inline style, which is what
+   * makes this able to override Framer at all. It is deliberately the same
+   * idiom as the <noscript> reset in app/layout.tsx — same root cause (SSR'd
+   * `initial`), same shape of fix, one attribute to grep for.
+   */
+  [data-motion],
+  [data-mask-word] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

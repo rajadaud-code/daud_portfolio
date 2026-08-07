@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Set-Location \"d:\\\\DAUD PORTFOLIO WEBSITE\\\\daud_portfolio\"; $env:PORT=\"3211\"; npm run start 2>&1 | Out-String)",
+      "Bash(grep -vE \"\\\\.map$\")",
+      "Bash(grep -vcE \"\\\\.map$\")",
+      "Bash(grep -viE \"\\\\.map$\")",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:3111/)",
+      "Bash(node -e ' *)",
+      "Bash(node -e \"console.log\\(require\\('image-size'\\)?'':''\\)\")"
+    ]
+  }
+}
