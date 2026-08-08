@@ -198,6 +198,125 @@ export const projects: Project[] = [
   },
 
   {
+    slug: "chex-ai-vehicle-inspection",
+    title: "Chex.AI — AI Vehicle Inspection Software",
+    category: "AI / LLM",
+    description:
+      "AI Vehicle Inspection Software automating damage detection and claims. Detects vehicle damage across 163 parts with 95–99% accuracy using YOLOv8 segmentation and computer vision.",
+    tech: [
+      "Node.js",
+      "Next.js",
+      "PostgreSQL",
+      "YOLOv8",
+      "Segmentation",
+      "PyTorch",
+      "Python",
+      "FastAPI",
+      "OpenCV",
+      "Tailwind CSS",
+    ],
+    links: {
+      live: "https://www.chex.ai/",
+    },
+    thumbnail: {
+      src: "/projects/chex-ai/chex-ai-1.png",
+      alt: "Chex.AI Vehicle Damage Detection Interface & Phone Capture Mockup",
+      width: 1024,
+      height: 591,
+    },
+    images: [
+      {
+        src: "/projects/chex-ai/chex-ai-1.png",
+        alt: "Chex.AI Vehicle Damage Detection Interface & Phone Capture Mockup",
+        width: 1024,
+        height: 591,
+      },
+      {
+        src: "/projects/chex-ai/chex-ai-2.png",
+        alt: "Chex.AI Damage Detection Platform with Car Scanning Overlay",
+        width: 1024,
+        height: 591,
+      },
+      {
+        src: "/projects/chex-ai/chex-ai-3.png",
+        alt: "Chex.AI Automated Damage Assessment on Vehicle Exterior & Glass",
+        width: 1024,
+        height: 592,
+      },
+      {
+        src: "/projects/chex-ai/chex-ai-4.png",
+        alt: "Chex.AI Inspection Testimonials & Rideshare Fleet Reviews",
+        width: 1024,
+        height: 578,
+      },
+      {
+        src: "/projects/chex-ai/chex-ai-5.png",
+        alt: "Chex.AI Fast Vehicle Inspection Workflow & Fleet Manager Spot",
+        width: 1024,
+        height: 583,
+      },
+    ],
+    featured: true,
+    order: 3,
+    caseStudy: {
+      metrics: [
+        { label: "Detection Accuracy", value: "95–99%", hint: "Across 163 vehicle parts" },
+        { label: "Report Generation", value: "< 2 mins", hint: "Automated inspection report" },
+        { label: "Model Architecture", value: "YOLOv8", hint: "Real-time instance segmentation" },
+      ],
+      aiPipelineType: "architecture",
+      problem:
+        "Manual vehicle inspections for car rentals, insurance claims, and fleet management are slow, subjective, and expensive. Drivers and claims adjusters wait hours or days for manual damage verification.",
+      approach:
+        "Engineered an enterprise AI vehicle inspection platform using Next.js, Node.js, PostgreSQL, and a custom YOLOv8-based instance segmentation model. Drivers capture vehicle photos on mobile devices, and our AI pipeline identifies damaged components across 163 vehicle body parts with 95-99% precision, generating instant claims reports ready for approval.",
+      architecture:
+        "Mobile capture interface (Next.js PWA) uploads high-res vehicle imagery -> Node.js API Gateway -> GPU-accelerated PyTorch/FastAPI worker microservice running YOLOv8 segmentation model -> Damage polygon extraction & part mapping -> PostgreSQL database -> Automated PDF claims report generation.",
+      architectureNodes: [
+        { id: "client", label: "Next.js Mobile/Web App", sublabel: "Camera Capture UI", type: "client" },
+        { id: "api", label: "Node.js API Gateway", sublabel: "Express Microservices", type: "api" },
+        { id: "ai", label: "YOLOv8 Segmentation", sublabel: "PyTorch & OpenCV Worker", type: "ai" },
+        { id: "db", label: "PostgreSQL & S3", sublabel: "Damage Reports & Assets", type: "db" },
+      ],
+      tradeoffs: [
+        {
+          decision: "Computer Vision Model Architecture",
+          choice: "YOLOv8 Instance Segmentation over Image Classification",
+          why: "Instance segmentation maps exact pixel polygon boundaries for damage locations on specific vehicle parts rather than whole-image labels.",
+        },
+        {
+          decision: "Model Serving Architecture",
+          choice: "Dedicated GPU FastAPI Microservice over Monolithic API",
+          why: "GPU-accelerated Python worker handles heavy PyTorch tensor math independently, preventing Node.js event-loop blocking.",
+        },
+      ],
+      implementation: [
+        "Trained custom YOLOv8 instance segmentation model trained on thousands of vehicle damage datasets recognizing 163 distinct body parts.",
+        "Built real-time bounding polygon overlay visualization on captured vehicle photos with damage confidence scoring.",
+        "Engineered PostgreSQL schema storing damage coordinates, part IDs, severity confidence scores, and historical inspection logs.",
+      ],
+      challenges: [
+        {
+          challenge:
+            "Varied lighting conditions, glare, and reflections causing false positive damage detection on clean vehicle surfaces.",
+          solution:
+            "Implemented image preprocessing routines using OpenCV (CLAHE contrast equalization and reflection filtering) prior to model inference.",
+        },
+      ],
+      outcome:
+        "Replaces slow manual inspections with AI damage reports generated in under 2 minutes with 95-99% accuracy across 163 vehicle parts.",
+      highlights: [
+        "163-part vehicle damage instance segmentation model",
+        "Sub-2-minute automated inspection report generation",
+        "Real-time bounding polygon canvas visualization",
+      ],
+      futureImprovements: [
+        "Add 3D point-cloud reconstruction from multi-angle video frames",
+        "Support automated repair cost estimate generation via parts pricing APIs",
+      ],
+    },
+  },
+
+  {
     slug: "research-pilot-api",
     title: "ResearchPilot API — Autonomous Document Research Engine",
     category: "AI / LLM",
@@ -209,7 +328,7 @@ export const projects: Project[] = [
     },
     thumbnail: null,
     featured: true,
-    order: 3,
+    order: 4,
     caseStudy: {
       metrics: [
         { label: "Time-To-First-Token", value: "320ms", hint: "SSE streaming via FastAPI" },
@@ -280,7 +399,7 @@ export const projects: Project[] = [
     },
     thumbnail: null,
     featured: true,
-    order: 4,
+    order: 5,
     caseStudy: {
       metrics: [
         { label: "Task Execution Speed", value: "2.4 mins", hint: "Autonomous multi-step research" },
@@ -351,7 +470,7 @@ export const projects: Project[] = [
     },
     thumbnail: null,
     featured: true,
-    order: 5,
+    order: 6,
     caseStudy: {
       metrics: [
         { label: "Benchmark Throughput", value: "10,000+ RPS", hint: "Async Uvicorn workers on Locust" },

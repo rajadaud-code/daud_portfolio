@@ -20,7 +20,7 @@ import {
 } from "@/components/ui";
 import { getProjectHref } from "@/content";
 import { cn } from "@/lib/utils";
-import type { OptionalImageAsset, Project } from "@/types";
+import type { OptionalImageAsset, Project, ProjectMediaVideo } from "@/types";
 
 /**
  * "01", "02" — the mono index shown on every card and slot.
@@ -141,7 +141,7 @@ export function ProjectCard({
             size="sm"
             trailingIcon={<ExternalLink aria-hidden="true" />}
           >
-            Live Demo
+            Live Platform
           </ButtonLink>
         ) : null}
 
@@ -169,6 +169,11 @@ function ProjectThumbnail({
   sizes: string;
 }) {
   const frame = cn("rounded-none aspect-16/10", className);
+
+  if (project.video) {
+    return <ProjectCardVideo video={project.video} frameClass={frame} />;
+  }
+
   const hasSlideshow = Boolean(project.images && project.images.length > 1);
 
   if (hasSlideshow) {
@@ -219,6 +224,36 @@ function ProjectThumbnail({
           "group-hover/card:scale-[1.04]",
         )}
       />
+    </CardMedia>
+  );
+}
+
+function ProjectCardVideo({
+  video,
+  frameClass,
+}: {
+  video: ProjectMediaVideo;
+  frameClass: string;
+}) {
+  return (
+    <CardMedia ratio={null} className={cn(frameClass, "relative overflow-hidden bg-black")}>
+      <video
+        src={video.src}
+        poster={video.poster}
+        autoPlay
+        loop
+        muted
+        playsInline
+        aria-label={video.alt || "Project Video Demo"}
+        className="h-full w-full object-cover transition-transform duration-[var(--duration-slow)] ease-editorial group-hover/card:scale-[1.04]"
+      />
+      <span className="absolute top-3 right-3 z-20 flex items-center gap-1.5 rounded-md bg-black/75 px-2.5 py-1 font-mono text-[10px] uppercase text-white backdrop-blur-md border border-white/10">
+        <span className="relative flex size-2">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+          <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
+        </span>
+        AI Inspection Demo
+      </span>
     </CardMedia>
   );
 }

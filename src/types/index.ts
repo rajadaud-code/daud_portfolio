@@ -1,17 +1,14 @@
-/**
- * Barrel for the type layer: `import type { Project, SiteConfig } from "@/types"`.
- *
- * Types only — no runtime values pass through here, so importing from this
- * barrel adds nothing to the bundle.
- */
 export type { ImageAsset, OptionalImageAsset } from "./media";
 export type {
   ArchitectureNode,
   EngineeringChallenge,
+  EngineeringTradeoff,
   Project,
   ProjectCaseStudy,
   ProjectCategory,
   ProjectLinks,
+  ProjectMediaVideo,
+  ProjectMetric,
   TechTag,
 } from "./project";
 export type { ExperienceEntry, YearMonth } from "./experience";

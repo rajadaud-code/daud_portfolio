@@ -7,49 +7,43 @@ Location: Islamabad, Pakistan / Remote
 Repository: rajadaud-code/daud_portfolio
 ===============================================================================
 
-[LATEST UPDATE — HERO BUTTON STYLES & DOWNLOAD RESUME BLACK BUTTON]
+[LATEST UPDATE — CHEX.AI VEHICLE INSPECTION & DEMO VIDEO]
 -------------------------------------------------------------------------------
-1. Download Resume Button Update (src/components/sections/hero.tsx):
-   - Styled "Download Resume" with the solid black primary button variant (`variant="primary"`), matching "Contact Me" perfectly.
-   - Text label updated to "Download Resume" (with download icon).
+1. Added Chex.AI as 3rd Featured Project (order: 3):
+   - Title: "Chex.AI — AI Vehicle Inspection Software"
+   - Headline / Subhead: "Automate Damage Detection & Claims with AI"
+   - Live Website: https://www.chex.ai/
+   - Category: AI / LLM
+   - Tech Stack: Node.js, Next.js, PostgreSQL, YOLOv8, Segmentation, PyTorch, Python, FastAPI, OpenCV, Tailwind CSS
 
-2. Uniform Hero CTA Button Row:
-   - "Contact Me" (Solid Black Primary Button)
-   - "View Projects" (Bordered Secondary Button)
-   - "Download Resume" (Solid Black Primary Button)
-   - "Connect" (LinkedIn Bordered Secondary Button)
-   - "Follow" (GitHub Bordered Secondary Button)
+2. Integrated High-Resolution Video Demo:
+   - Video File: public/projects/chex-ai/chex-ai-demo.mp4 (copied from video folder)
+   - Project Card Feature: Real-time autoplaying, looping, muted video player with an "AI Inspection Demo" live indicator badge on the card thumbnail frame.
+   - Dedicated Case Study Page (/projects/chex-ai-vehicle-inspection): Embedded HTML5 video player with user controls.
 
--------------------------------------------------------------------------------
-[GOLDPULSE TRADING PLATFORM & SLIDESHOW CAROUSEL]
--------------------------------------------------------------------------------
-1. Added GOLDPULSE Trading Platform as the 2nd Featured Project (order: 2):
-   - Title: "GOLDPULSE — World's Leading Gold Trading Platform"
-   - Category: Full Stack
-   - Tech Stack: Next.js, Node.js, Express, MongoDB Atlas, TradingView API, Tailwind CSS, REST APIs
-   - Status: Active Private Team Development ("In Active Private Development" badge & footer indicator).
-
-2. Interactive 4-Screenshot Slideshow Carousel:
-   - Added automatic 3.5-second cycling through all 4 uploaded GoldPulse screenshots:
-     * Slide 1: GoldPulse Landing Page Hero & Live XAU/USD Quote
-     * Slide 2: Real-time TradingView XAU/USD Dark Technical Chart & Watchlist
-     * Slide 3: Light Mode XAU/USD Technical Analysis Chart with Moving Averages
-     * Slide 4: XAU/USD 1-Minute Candle Chart, Volume & Performance Metrics
-   - Pause-on-hover micro-interaction, pagination pill indicators (dots), and slide number counter badge ("1 / 4").
+3. Detailed Case Study Generated:
+   - Problem: Replaces slow, manual vehicle damage inspection with AI.
+   - Approach: Captures vehicle photos via mobile devices, running a YOLOv8 instance segmentation model recognizing 163 vehicle body parts with 95-99% precision.
+   - Metrics: 95-99% Detection Accuracy, <2 mins Report Generation, YOLOv8 Instance Segmentation.
 
 -------------------------------------------------------------------------------
-[PHASE 3 — DESIGN & ENGINEERING ELEVATION]
+[PRIOR FEATURED PROJECTS & SOCIAL BUTTONS]
 -------------------------------------------------------------------------------
-1. AI Engineering Showcase Components:
-   - RagPipelineDiagram (Interactive 7-step RAG flow visualizer)
-   - AgentWorkflowDiagram (Multi-agent topology visualizer)
-   - ModelComparisonTable (LLM Evaluation matrix: Claude 3.5 Sonnet, GPT-4o, Llama 3 70B, DeepSeek R1)
-   - LlmEcosystemGrid (AI Stack capability grid: LangChain, ChromaDB, FastAPI, RAG, Python)
+1. Hero Section Buttons:
+   - Download Resume (Solid Black Primary Button)
+   - View Projects (Bordered Secondary Button)
+   - Connect (LinkedIn Secondary Button)
+   - Follow (GitHub Secondary Button)
 
-2. Recruiter 30-Second Executive Summary:
-   - RecruiterSummaryCard with live availability status indicator ("Available for Full-time Roles & Remote"), 1-click Resume PDF download, 1-click email copy, and social profile links.
+2. GOLDPULSE Gold Trading Platform (order: 2):
+   - 4-Screenshot Auto-Slideshow Carousel (3.5s cycle, pause on hover, slide dots & counter badge).
+   - Tech Stack: Next.js, Node.js, Express, MongoDB Atlas, TradingView API, Tailwind CSS.
 
-3. Complete SEO & Structured Data:
-   - schema.org/Person JSON-LD schema injected in layout head.
-   - 100% Type-safe & static prerendered across all 14 routes.
+3. Full Featured Lineup:
+   - 01: AI Expense Management System
+   - 02: GOLDPULSE — World's Leading Gold Trading Platform
+   - 03: Chex.AI — AI Vehicle Inspection Software (Video Demo)
+   - 04: ResearchPilot API — Autonomous Document Research Engine
+   - 05: Multi-Agent AI Task Orchestrator
+   - 06: Production FastAPI Microservice Engine
 ===============================================================================

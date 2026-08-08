@@ -149,10 +149,25 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           </Reveal>
         </header>
 
-        {/* Thumbnail Preview */}
-        {project.thumbnail ? (
-          <Reveal trigger="mount" delay={0.7} className="mt-12">
-            <div className="overflow-hidden rounded-panel border border-line bg-surface">
+        {/* Video / Thumbnail Preview */}
+        {project.video ? (
+          <Reveal trigger="mount" delay={0.8} className="mt-12">
+            <div className="overflow-hidden rounded-panel border border-line bg-black shadow-lifted">
+              <video
+                src={project.video.src}
+                poster={project.video.poster}
+                controls
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full max-h-[600px] object-contain mx-auto"
+              />
+            </div>
+          </Reveal>
+        ) : project.thumbnail ? (
+          <Reveal trigger="mount" delay={0.8} className="mt-12">
+            <div className="overflow-hidden rounded-panel border border-line bg-surface shadow-lifted">
               <Image
                 src={project.thumbnail.src}
                 alt={project.thumbnail.alt}

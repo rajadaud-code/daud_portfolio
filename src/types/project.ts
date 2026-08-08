@@ -54,6 +54,12 @@ export interface ProjectCaseStudy {
   futureImprovements?: string[];
 }
 
+export interface ProjectMediaVideo {
+  src: string;
+  poster?: string;
+  alt?: string;
+}
+
 export interface Project {
   slug: string;
   title: string;
@@ -63,6 +69,7 @@ export interface Project {
   links: ProjectLinks;
   thumbnail: OptionalImageAsset;
   images?: OptionalImageAsset[];
+  video?: ProjectMediaVideo;
   featured: boolean;
   order: number;
   caseStudy?: ProjectCaseStudy;
