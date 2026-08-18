@@ -235,9 +235,7 @@ export default function AboutPage() {
                   <TagList className="mt-5">
                     {category.items.map((item) => (
                       <li key={item}>
-                        <Tag size="base" variant={category.id === "ai" ? "accent" : "default"}>
-                          {item}
-                        </Tag>
+                        <Tag size="base">{item}</Tag>
                       </li>
                     ))}
                   </TagList>
