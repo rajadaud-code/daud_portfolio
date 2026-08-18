@@ -5,6 +5,8 @@ export type TechTag = string;
 export interface ProjectLinks {
   /** Public repository. Omit if the source is private. */
   github?: string;
+  /** Backend repository if decoupled. */
+  backendGithub?: string;
   /** Deployed demo. Omit if nothing is hosted. */
   live?: string;
 }
@@ -68,6 +70,7 @@ export interface Project {
   tech: TechTag[];
   links: ProjectLinks;
   thumbnail: OptionalImageAsset;
+  thumbnailFit?: "cover" | "contain";
   images?: OptionalImageAsset[];
   video?: ProjectMediaVideo;
   featured: boolean;

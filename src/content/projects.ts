@@ -317,72 +317,173 @@ export const projects: Project[] = [
   },
 
   {
-    slug: "research-pilot-api",
-    title: "ResearchPilot API — Autonomous Document Research Engine",
+    slug: "enterprise-graphrag-intelligence-engine",
+    title: "Enterprise GraphRAG Intelligence Engine",
     category: "AI / LLM",
     description:
-      "Autonomous RAG and document research API powered by FastAPI, ChromaDB, Server-Sent Events (SSE) streaming, and LangChain.",
-    tech: ["Python", "FastAPI", "ChromaDB", "LangChain", "RAG", "Claude"],
+      "Enterprise-grade, high-performance asynchronous GraphRAG platform combining Qdrant dense vector search, Neo4j multi-hop knowledge graph relationships, stateful LangGraph agentic workflows, and sub-5ms Redis semantic caching.",
+    tech: [
+      "FastAPI",
+      "LangGraph",
+      "Qdrant",
+      "Neo4j",
+      "Redis",
+      "Celery",
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Groq",
+      "Llama-3.1",
+      "PostgreSQL",
+    ],
     links: {
-      github: "https://github.com/rajadaud-code",
+      github:
+        "https://github.com/rajadaud-code/graph_rag_enterprise_engine_frontend",
+      backendGithub:
+        "https://github.com/rajadaud-code/graphrag-enterprise-engine",
+      live: "https://graph-rag-enterprise-engine-fronten.vercel.app/",
     },
-    thumbnail: null,
+    thumbnail: {
+      src: "/projects/graphrag/graphrag-main.png",
+      alt: "Enterprise GraphRAG Query Engine Live Interface showing Document Ingestion, System Status, and Knowledge Graph Query Actions",
+      width: 1024,
+      height: 450,
+    },
+    thumbnailFit: "contain",
+    images: [
+      {
+        src: "/projects/graphrag/graphrag-main.png",
+        alt: "Enterprise GraphRAG Query Engine Live Interface",
+        width: 1024,
+        height: 450,
+      },
+      {
+        src: "/projects/graphrag/langgraph-state-machine.png",
+        alt: "LangGraph Agent State Machine Execution Architecture Diagram showing RouterNode, VectorNode, GraphNode, GeneratorNode, and Evaluator Critic loop",
+        width: 1200,
+        height: 800,
+      },
+    ],
     featured: true,
     order: 4,
     caseStudy: {
       metrics: [
-        { label: "Time-To-First-Token", value: "320ms", hint: "SSE streaming via FastAPI" },
-        { label: "Retrieval Precision", value: "+18%", hint: "Cross-Encoder Cohere Reranking" },
-        { label: "Document Collection Scale", value: "500+ PDFs", hint: "Indexed in ChromaDB Vector Store" },
+        {
+          label: "Factual Grounding",
+          value: "100%",
+          hint: "Zero hallucinations via Self-RAG evaluator",
+        },
+        {
+          label: "Semantic Cache Latency",
+          value: "< 5ms",
+          hint: "Redis vector cosine similarity (> 0.95)",
+        },
+        {
+          label: "Agentic Synthesis Latency",
+          value: "< 1.0s",
+          hint: "Groq Llama-3.1-8B-Instant inference",
+        },
       ],
       aiPipelineType: "rag",
       problem:
-        "Extracting synthesis and contextual citations across hundreds of dense PDF documents manually requires hours of manual searching and often produces hallucinatory answers when relying on simple LLM prompts.",
+        "Traditional vector-only RAG systems suffer from semantic disconnects when answering complex multi-hop queries across dense technical and academic documents. Standard vector similarity misses explicit entity relationships (such as cross-paper citations), while standard cloud LLMs suffer from high latency, frequent rate limits, and ungrounded hallucinations without verification guardrails.",
       approach:
-        "Designed an autonomous retrieval-augmented generation (RAG) backend engine using FastAPI, LangChain, and ChromaDB vector store. Employs semantic document chunking, hybrid vector/keyword search, and real-time Server-Sent Events (SSE) to stream reasoning steps and citations token-by-token.",
+        "Architected an enterprise-grade, fully asynchronous GraphRAG Intelligence Engine combining dense vector similarity search (Qdrant) with multi-hop knowledge graph traversal (Neo4j). The query and evaluation pipeline is orchestrated via a 5-node cyclic LangGraph Agentic state machine powered by Groq's high-speed Llama-3.1-8B-Instant inference (500k TPD quota), guarded by a sub-5ms Redis semantic cosine similarity caching layer (<0.95 threshold) and asynchronous background Celery ingestion workers.",
       architecture:
-        "FastAPI backend exposes lifespan-managed async HTTP and SSE endpoints. Incoming PDFs are parsed with PyMuPDF, chunked via recursive character splitters, embedded using OpenAI/BGE embeddings, and indexed in persistent ChromaDB collections.",
+        "Client (Next.js 15 App Router + Tailwind + shadcn/ui) communicates with FastAPI backend via async endpoints. Incoming queries hit Redis Semantic Caching -> on cache miss, LangGraph state machine dispatches RouterNode -> concurrent VectorNode (Qdrant dense search) & GraphNode (Neo4j Cypher multi-hop traversal) -> GeneratorNode synthesizes context -> Self-RAG EvaluatorNode verifies factual grounding against retrieved document chunks and graph entities. Document ingestion uses Celery workers with aiofiles for non-blocking PDF parsing and Cypher graph population.",
       architectureNodes: [
-        { id: "client", label: "Client Application", sublabel: "SSE Consumer", type: "client" },
-        { id: "api", label: "FastAPI Engine", sublabel: "Async Python 3.12", type: "api" },
-        { id: "ai", label: "Claude / GPT Model", sublabel: "Streaming RAG", type: "ai" },
-        { id: "db", label: "ChromaDB Store", sublabel: "Vector Embeddings", type: "db" },
+        {
+          id: "client",
+          label: "Next.js Frontend",
+          sublabel: "Tailwind & Real-time State",
+          type: "client",
+        },
+        {
+          id: "cache",
+          label: "Redis Semantic Cache",
+          sublabel: "< 5ms Cosine Similarity",
+          type: "cache",
+        },
+        {
+          id: "api",
+          label: "FastAPI Engine",
+          sublabel: "Async Python 3.12",
+          type: "api",
+        },
+        {
+          id: "ai",
+          label: "LangGraph State Machine",
+          sublabel: "5-Node Cyclic Multi-Agent",
+          type: "ai",
+        },
+        {
+          id: "db",
+          label: "Qdrant & Neo4j",
+          sublabel: "Dense Vectors + Graph Entities",
+          type: "db",
+        },
+        {
+          id: "queue",
+          label: "Celery Workers",
+          sublabel: "Async PDF Ingestion Pipeline",
+          type: "queue",
+        },
       ],
       tradeoffs: [
         {
-          decision: "Vector Database Indexing",
-          choice: "ChromaDB with HNSW Cosine Similarity",
-          why: "Delivered ultra-fast similarity search with zero cluster setup overhead compared to multi-node vector setups.",
+          decision: "Retrieval Architecture Strategy",
+          choice: "Hybrid GraphRAG (Qdrant + Neo4j) over Vector-Only RAG",
+          why: "Combines unstructured dense semantic search with structured graph relational context, resolving multi-hop scientific queries that vector similarity alone fails to capture.",
         },
         {
-          decision: "Real-time Streaming Protocol",
-          choice: "Server-Sent Events (SSE) over WebSockets",
-          why: "Simpler uni-directional HTTP response streaming with native browser EventSource support without WebSocket state handshakes.",
+          decision: "Inference Engine & Model Provider",
+          choice: "Groq Llama-3.1-8B-Instant over standard Cloud LLMs",
+          why: "Delivered sub-second agentic state machine traversal with a 500,000 Tokens/Day (TPD) quota and 14,400 Requests/Day, eliminating 429 rate limit delays.",
+        },
+        {
+          decision: "Response Caching Mechanism",
+          choice: "Redis Vector Semantic Caching over Exact Key-Value Caching",
+          why: "Uses vector cosine similarity (> 0.95 threshold) to return verified answers in < 5ms for semantically equivalent queries, with strict guardrails preventing error responses from ever being cached.",
+        },
+        {
+          decision: "Document Ingestion Pipeline",
+          choice: "Asynchronous Celery + aiofiles over Synchronous Processing",
+          why: "Offloads heavy PDF extraction, chunking, and Cypher graph population to background workers without blocking HTTP server threads.",
         },
       ],
       implementation: [
-        "Designed asynchronous streaming endpoint using starlette.responses.EventSourceResponse for low-latency token delivery.",
-        "Implemented ChromaDB metadata filter handlers allowing scoped document queries per session.",
-        "Integrated custom RAG evaluation metrics to score chunk retrieval precision before LLM context injection.",
+        "Built 5-node cyclic LangGraph state machine: Fast Router -> Vector Search (Qdrant) + Graph Search (Neo4j) -> Context Synthesis Generator -> Self-RAG Evaluator Critic.",
+        "Implemented Redis Cosine Similarity Semantic Caching (< 5ms response time) with strict error-guardrails preventing erroneous outputs from caching.",
+        "Designed asynchronous Celery ingestion pipeline parsing complex academic PDFs and constructing Neo4j knowledge graph nodes & relationship edges.",
+        "Developed responsive enterprise dark slate interface (#030712) with real-time system pulse monitors for PostgreSQL, Qdrant, Neo4j, and Redis.",
+        "Implemented interactive Context Inspector exposing live vector chunk similarity scores and cited Knowledge Graph entity nodes.",
       ],
       challenges: [
         {
           challenge:
-            "Context window overflow and hallucinated citations on long scientific papers.",
+            "LLM hallucinations and failure to ground claims in multi-document scientific reports (e.g. Stanford AI Index Report).",
           solution:
-            "Implemented hierarchical re-ranking using Cross-Encoder models to prune irrelevant vector hits before prompt assembly.",
+            "Built a cyclic Self-RAG Evaluator Critic node inside LangGraph that cross-references generated claims against retrieved Qdrant chunks and Neo4j entity edges, triggering automated prompt refinement and regeneration if grounding score falls below threshold.",
+        },
+        {
+          challenge:
+            "Heavy multi-database cluster requirement (PostgreSQL, Qdrant, Neo4j, Redis) making full cloud deployment resource-intensive.",
+          solution:
+            "Configured serverless cloud infrastructure across Neon PostgreSQL, Qdrant Cloud, Neo4j Aura Cloud, and Upstash Redis over TLS/SSL with RESP2 protocol support, providing clear local Docker setup instructions for full backend evaluation.",
         },
       ],
       outcome:
-        "Delivered Sub-350ms time-to-first-token (TTFT) on SSE query streams across collections of 500+ documents.",
+        "Achieved 100% factually grounded responses on academic benchmark tests (Stanford AI Index Report) with sub-second agentic synthesis, live Neo4j entity citations, and < 5ms semantic cache hits.",
       highlights: [
-        "Server-Sent Events (SSE) streaming architecture",
-        "ChromaDB persistent vector store integration",
-        "FastAPI lifespan management and async resource control",
+        "Stateful LangGraph cyclic agent state machine with Self-RAG evaluation",
+        "Hybrid Qdrant vector retrieval + Neo4j multi-hop knowledge graph synthesis",
+        "Sub-5ms Redis semantic cosine similarity caching layer",
+        "Real-time multi-database pulse health monitoring dashboard",
+        "Asynchronous non-blocking Celery worker document ingestion pipeline",
       ],
       futureImprovements: [
-        "Add graph-RAG capabilities using Neo4j for entity relationship mapping",
-        "Deploy distributed worker tasks via Celery and Redis",
+        "Add interactive streaming Graph visualization canvas directly in the frontend chat inspector",
+        "Support multi-modal PDF table extraction and chart reasoning via vision foundation models",
       ],
     },
   },

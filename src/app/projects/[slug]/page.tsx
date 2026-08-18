@@ -116,7 +116,18 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                   variant="secondary"
                   leadingIcon={<GithubIcon />}
                 >
-                  View Repository
+                  {project.links.backendGithub ? "Frontend Repository" : "View Repository"}
+                </ButtonLink>
+              ) : null}
+
+              {project.links.backendGithub ? (
+                <ButtonLink
+                  href={project.links.backendGithub}
+                  target="_blank"
+                  variant="secondary"
+                  leadingIcon={<GithubIcon />}
+                >
+                  Backend Repository
                 </ButtonLink>
               ) : null}
 
@@ -147,6 +158,29 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               </TagList>
             </div>
           </Reveal>
+
+          {/* Benchmark Metrics Bar */}
+          {caseStudy?.metrics ? (
+            <Reveal trigger="mount" delay={0.7}>
+              <div className="mt-8 grid grid-cols-2 gap-4 border-t border-line pt-6 sm:grid-cols-3">
+                {caseStudy.metrics.map((m, idx) => (
+                  <div key={idx} className="flex flex-col">
+                    <span className="font-mono text-xs uppercase text-accent font-medium">
+                      {m.label}
+                    </span>
+                    <span className="mt-1 text-2xl font-bold tracking-tight text-ink md:text-3xl">
+                      {m.value}
+                    </span>
+                    {m.hint ? (
+                      <span className="mt-0.5 text-xs text-ink-subtle">
+                        {m.hint}
+                      </span>
+                    ) : null}
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          ) : null}
         </header>
 
         {/* Video / Thumbnail Preview */}
@@ -229,6 +263,42 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
                 {caseStudy.architectureNodes ? (
                   <ArchitectureDiagram nodes={caseStudy.architectureNodes} />
+                ) : null}
+
+                {/* Secondary Architecture State Machine Image */}
+                {project.images && project.images[1] ? (
+                  <div className="mt-10 overflow-hidden rounded-panel border border-line bg-surface p-4 shadow-lifted">
+                    <span className="font-mono text-xs uppercase text-ink-subtle block mb-3 px-2">
+                      State Machine Execution Flow
+                    </span>
+                    <Image
+                      src={project.images[1].src}
+                      alt={project.images[1].alt}
+                      width={project.images[1].width}
+                      height={project.images[1].height}
+                      className="w-full rounded-lg object-contain bg-black/90"
+                    />
+                  </div>
+                ) : null}
+
+                {/* Local Backend Run Callout */}
+                {project.links.backendGithub ? (
+                  <div className="mt-8 rounded-card border border-accent/20 bg-accent/5 p-6">
+                    <span className="font-mono text-xs font-semibold uppercase text-accent">
+                      ⚡ Backend Architecture & Local Evaluation Note
+                    </span>
+                    <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+                      The frontend interface is live and deployed on Vercel. Due to multi-database cloud clusters (Qdrant vector store, Neo4j knowledge graph, Redis semantic cache, and background Celery workers), you can clone the backend repository to run and evaluate the complete pipeline locally following the{" "}
+                      <a
+                        href={project.links.backendGithub}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-medium text-accent underline underline-offset-4"
+                      >
+                        Backend Repository Guidelines
+                      </a>.
+                    </p>
+                  </div>
                 ) : null}
               </Reveal>
             </Container>

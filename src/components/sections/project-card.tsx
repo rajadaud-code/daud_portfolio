@@ -129,7 +129,19 @@ export function ProjectCard({
             size="sm"
             leadingIcon={<GithubIcon aria-hidden="true" />}
           >
-            GitHub
+            {project.links.backendGithub ? "Frontend" : "GitHub"}
+          </ButtonLink>
+        ) : null}
+
+        {project.links.backendGithub ? (
+          <ButtonLink
+            href={project.links.backendGithub}
+            target="_blank"
+            variant="ghost"
+            size="sm"
+            leadingIcon={<GithubIcon aria-hidden="true" />}
+          >
+            Backend
           </ButtonLink>
         ) : null}
 
@@ -174,7 +186,9 @@ function ProjectThumbnail({
     return <ProjectCardVideo video={project.video} frameClass={frame} />;
   }
 
-  const hasSlideshow = Boolean(project.images && project.images.length > 1);
+  const hasSlideshow = Boolean(
+    project.images && project.images.length > 1 && project.thumbnailFit !== "contain",
+  );
 
   if (hasSlideshow) {
     return (
@@ -209,8 +223,16 @@ function ProjectThumbnail({
     );
   }
 
+  const isContain = project.thumbnailFit === "contain";
+
   return (
-    <CardMedia ratio={null} className={frame}>
+    <CardMedia
+      ratio={null}
+      className={cn(
+        frame,
+        isContain && "bg-[#030712] flex items-center justify-center p-2",
+      )}
+    >
       <Image
         src={project.thumbnail.src}
         alt={project.thumbnail.alt}
@@ -219,9 +241,10 @@ function ProjectThumbnail({
         priority={priority}
         sizes={sizes}
         className={cn(
-          "h-full w-full object-cover",
+          "h-full w-full",
+          isContain ? "object-contain" : "object-cover",
           "transition-transform duration-[var(--duration-slow)] ease-editorial",
-          "group-hover/card:scale-[1.04]",
+          "group-hover/card:scale-[1.03]",
         )}
       />
     </CardMedia>
