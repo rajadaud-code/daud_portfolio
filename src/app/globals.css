@@ -248,10 +248,14 @@
      Tailwind's numeric radii (rounded-sm/md/lg) are left intact for
      one-off internal details.
      ---------------------------------------------------------------------- */
-  --radius-control: 0.625rem; /* buttons, inputs, chips */
-  --radius-card: 1rem; /* project + certification cards */
-  --radius-panel: 1.5rem; /* large surfaces, media frames */
-  --radius-pill: 9999px; /* tags, filter toggles */
+  --radius-control: 0.625rem;
+  /* buttons, inputs, chips */
+  --radius-card: 1rem;
+  /* project + certification cards */
+  --radius-panel: 1.5rem;
+  /* large surfaces, media frames */
+  --radius-pill: 9999px;
+  /* tags, filter toggles */
 
   /* ------------------------------------------------------------------------
      LOADING
@@ -265,6 +269,7 @@
     0% {
       background-position: 100% 0;
     }
+
     100% {
       background-position: -100% 0;
     }
@@ -353,12 +358,10 @@ body {
  */
 @utility skeleton {
   background-color: var(--surface);
-  background-image: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--surface-raised) 50%,
-    transparent 100%
-  );
+  background-image: linear-gradient(90deg,
+      transparent 0%,
+      var(--surface-raised) 50%,
+      transparent 100%);
   background-size: 200% 100%;
   background-repeat: no-repeat;
   animation: var(--animate-shimmer);

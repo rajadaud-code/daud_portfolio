@@ -81,10 +81,7 @@ export function Navbar() {
       // `sticky` rather than `fixed`: the header keeps its place in flow, so
       // the page below does not need a magic top offset to compensate for it.
       className={cn(
-        "sticky top-0 z-50 border-b transition-colors duration-[var(--duration-fast)]",
-        // The border only appears once content is behind the bar. At the top of
-        // an all-white page a hairline under the nav is a line for its own sake.
-        isScrolled ? "glass border-line" : "border-transparent bg-canvas",
+        "sticky top-0 z-50 border-b border-line bg-canvas/85 backdrop-blur-md transition-colors duration-[var(--duration-fast)]",
       )}
       animate={{ y: isHidden && !shouldReduceMotion ? "-100%" : "0%" }}
       transition={{ duration: DURATION.base, ease: EASE.editorial }}
@@ -94,8 +91,7 @@ export function Navbar() {
           aria-label="Main"
           className="flex h-16 items-center justify-between gap-6 md:h-20"
         >
-          {/* Wordmark. aria-label because the visible text is the name alone,
-              which does not convey that this is the way home. */}
+          {/* Wordmark */}
           <Link
             href="/"
             aria-label={`${site.name} — home`}
@@ -165,14 +161,6 @@ interface NavLinkProps {
 
 /**
  * A desktop nav link with a shared active indicator.
- *
- * `layoutId` makes the underline travel between links instead of cutting: every
- * element sharing the id is treated as the same element moving, so Framer
- * interpolates position and width for free. This is the whole reason the
- * indicator is a sibling element rather than a border on the link.
- *
- * `aria-current="page"` carries the same information non-visually — the
- * underline is decoration, this is the fact.
  */
 function NavLink({ href, label, isActive, animateIndicator }: NavLinkProps) {
   return (
@@ -181,7 +169,7 @@ function NavLink({ href, label, isActive, animateIndicator }: NavLinkProps) {
       aria-current={isActive ? "page" : undefined}
       className={cn(
         "relative inline-flex h-9 items-center rounded-control px-3 text-sm transition-colors",
-        isActive ? "text-ink" : "text-ink-muted hover:text-ink",
+        isActive ? "text-ink font-medium" : "text-ink-muted hover:text-ink",
       )}
     >
       {label}
@@ -243,7 +231,7 @@ function MobileMenu({ id, isOpen, pathname, reduceMotion }: MobileMenuProps) {
                     className={cn(
                       "flex h-12 items-center text-lg tracking-tight transition-colors",
                       pathname === item.href
-                        ? "text-ink"
+                        ? "text-ink font-semibold"
                         : "text-ink-muted hover:text-ink",
                     )}
                   >

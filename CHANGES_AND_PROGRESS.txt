@@ -7,43 +7,30 @@ Location: Islamabad, Pakistan / Remote
 Repository: rajadaud-code/daud_portfolio
 ===============================================================================
 
-[LATEST UPDATE — CHEX.AI VEHICLE INSPECTION & DEMO VIDEO]
+[LATEST UPDATE — CHEX.AI 5-SCREENSHOT AUTO-SLIDESHOW CAROUSEL]
 -------------------------------------------------------------------------------
-1. Added Chex.AI as 3rd Featured Project (order: 3):
-   - Title: "Chex.AI — AI Vehicle Inspection Software"
-   - Headline / Subhead: "Automate Damage Detection & Claims with AI"
-   - Live Website: https://www.chex.ai/
-   - Category: AI / LLM
-   - Tech Stack: Node.js, Next.js, PostgreSQL, YOLOv8, Segmentation, PyTorch, Python, FastAPI, OpenCV, Tailwind CSS
+1. Chex.AI Media Upgrade (Project #3):
+   - Replaced single video with an interactive 5-screenshot auto-slideshow carousel matching Project #2 (GoldPulse) pattern.
+   - 5 High-Resolution Screenshots:
+     * Slide 1: Chex.AI Hero Section & Phone Capture Mockup ("AI Vehicle Inspection Software")
+     * Slide 2: Chex.AI Car Scanning & Damage Detection Interface
+     * Slide 3: Chex.AI Automated Exterior & Glass Inspection Assessment
+     * Slide 4: Chex.AI Fleet Manager Testimonials & Reviews Grid
+     * Slide 5: Chex.AI Fast Inspection Workflow & Becky Nelson Testimonial Spot
+   - Slideshow Features: Automatic 3.5-second slide cycling, pause-on-hover interaction, pagination pill indicators (dots), and slide number counter badge ("1 / 5").
 
-2. Integrated High-Resolution Video Demo:
-   - Video File: public/projects/chex-ai/chex-ai-demo.mp4 (copied from video folder)
-   - Project Card Feature: Real-time autoplaying, looping, muted video player with an "AI Inspection Demo" live indicator badge on the card thumbnail frame.
-   - Dedicated Case Study Page (/projects/chex-ai-vehicle-inspection): Embedded HTML5 video player with user controls.
-
-3. Detailed Case Study Generated:
-   - Problem: Replaces slow, manual vehicle damage inspection with AI.
-   - Approach: Captures vehicle photos via mobile devices, running a YOLOv8 instance segmentation model recognizing 163 vehicle body parts with 95-99% precision.
-   - Metrics: 95-99% Detection Accuracy, <2 mins Report Generation, YOLOv8 Instance Segmentation.
+2. Full Featured Lineup (All 6 Projects):
+   - 01: AI Expense Management System (React, Node.js, Express, PostgreSQL, Gemini AI)
+   - 02: GOLDPULSE — World's Leading Gold Trading Platform (4-Screenshot Slideshow, Next.js, Node.js, Express, MongoDB Atlas, TradingView)
+   - 03: Chex.AI — AI Vehicle Inspection Software (5-Screenshot Slideshow, Node.js, Next.js, PostgreSQL, YOLOv8, PyTorch, OpenCV)
+   - 04: ResearchPilot API — Autonomous Document Research Engine (Python, FastAPI, ChromaDB, LangChain, RAG)
+   - 05: Multi-Agent AI Task Orchestrator (LangGraph, n8n, Claude 3.5, Python)
+   - 06: Production FastAPI Microservice Engine (FastAPI, SQLAlchemy 2.0, Redis, Docker)
 
 -------------------------------------------------------------------------------
-[PRIOR FEATURED PROJECTS & SOCIAL BUTTONS]
+[HERO SECTION & RECRUITER SPOTLIGHT]
 -------------------------------------------------------------------------------
-1. Hero Section Buttons:
-   - Download Resume (Solid Black Primary Button)
-   - View Projects (Bordered Secondary Button)
-   - Connect (LinkedIn Secondary Button)
-   - Follow (GitHub Secondary Button)
-
-2. GOLDPULSE Gold Trading Platform (order: 2):
-   - 4-Screenshot Auto-Slideshow Carousel (3.5s cycle, pause on hover, slide dots & counter badge).
-   - Tech Stack: Next.js, Node.js, Express, MongoDB Atlas, TradingView API, Tailwind CSS.
-
-3. Full Featured Lineup:
-   - 01: AI Expense Management System
-   - 02: GOLDPULSE — World's Leading Gold Trading Platform
-   - 03: Chex.AI — AI Vehicle Inspection Software (Video Demo)
-   - 04: ResearchPilot API — Autonomous Document Research Engine
-   - 05: Multi-Agent AI Task Orchestrator
-   - 06: Production FastAPI Microservice Engine
+- Hero Buttons: Contact Me (Solid Black), View Projects (Secondary), Download Resume (Solid Black), Connect (LinkedIn), Follow (GitHub).
+- Recruiter Executive Summary Card with live availability indicator ("Available for Full-time Roles & Remote").
+- Complete SEO & Structured Data (schema.org/Person JSON-LD schema).
 ===============================================================================
