@@ -8,10 +8,10 @@ import { cn } from "@/lib/utils";
 
 const TIMELINE = {
   eyebrow: 0.1,
-  headline: 0.25,
-  headlineStagger: 0.09,
-  subheading: 0.75,
-  actions: 0.9,
+  headline: 0.22,
+  headlineStagger: 0.18,
+  subheading: 0.8,
+  actions: 0.95,
   photo: 0.4,
 } as const;
 

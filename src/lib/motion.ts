@@ -96,10 +96,16 @@ export const staggerContainer: Variants = {
  * the curve defined in exactly one place.
  */
 export const maskReveal: Variants = {
-  hidden: { y: "110%" },
+  hidden: { y: "125%", opacity: 0, filter: "blur(6px)" },
   visible: (delay: number = 0) => ({
     y: "0%",
-    transition: { ...TRANSITION.editorial, delay },
+    opacity: 1,
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.95,
+      ease: [0.16, 1, 0.3, 1],
+      delay,
+    },
   }),
 };
 

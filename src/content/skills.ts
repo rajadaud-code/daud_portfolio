@@ -1,38 +1,83 @@
 import type { SkillCategory } from "@/types";
 
-/**
- * Skills, grouped exactly as the PRD groups them. Order is the PRD's order —
- * AI first, which matches how Daud positions himself in the hero.
- *
- * Spellings are transcribed verbatim ("Langraph", "Javascript"). If those are
- * meant to be "LangGraph" and "JavaScript", fix them here — one edit, and every
- * surface that renders skills follows.
- */
 export const skills: SkillCategory[] = [
   {
     id: "ai",
-    label: "AI",
-    items: ["LangChain", "Langraph", "RAG", "n8n", "Claude", "GPT", "Gemini"],
+    label: "AI & LLM Frameworks",
+    items: [
+      "LangChain",
+      "LangGraph",
+      "RAG",
+      "GraphRAG",
+      "Agentic RAG",
+      "Large Language Models (LLMs)",
+      "AI Autonomous Agents",
+      "Prompt Engineering",
+    ],
   },
   {
     id: "backend",
-    label: "Backend",
-    items: ["Python", "FastAPI", "Node.js", "Express"],
-  },
-  {
-    id: "databases",
-    label: "Databases",
-    items: ["PostgreSQL", "MongoDB", "Vector DB", "Pinecone"],
+    label: "Backend Technologies",
+    items: [
+      "FastAPI",
+      "Node.js",
+      "Express.js",
+      "REST APIs",
+      "System Architecture",
+      "JWT Authentication",
+      "Socket.io",
+      "Microservices",
+      "Celery",
+      "asyncio",
+    ],
   },
   {
     id: "frontend",
-    label: "Frontend",
-    items: ["React", "Next.js", "Javascript"],
+    label: "Frontend Development",
+    items: [
+      "React.js",
+      "Next.js",
+      "HTML5",
+      "CSS3",
+      "JavaScript (ES6+)",
+    ],
   },
   {
-    id: "ml",
-    label: "ML",
-    items: ["PyTorch", "NumPy", "Pandas", "Matplotlib", "Seaborn"],
+    id: "languages",
+    label: "Programming Languages",
+    items: [
+      "Python",
+      "JavaScript",
+      "SQL",
+      "TypeScript",
+      "Cypher",
+    ],
+  },
+  {
+    id: "databases",
+    label: "Databases & Vector Stores",
+    items: [
+      "PostgreSQL",
+      "MongoDB",
+      "Pinecone",
+      "ChromaDB",
+      "Neo4j",
+      "Qdrant",
+      "Redis",
+    ],
+  },
+  {
+    id: "tools",
+    label: "Libraries & Cloud Tools",
+    items: [
+      "Git",
+      "Docker",
+      "Postman",
+      "Vercel",
+      "Render",
+      "Huawei ModelArts",
+      "OpenCV",
+    ],
   },
 ];
 
