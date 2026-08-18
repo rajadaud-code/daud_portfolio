@@ -6,9 +6,9 @@ import type { SiteConfig } from "@/types";
  */
 export const site: SiteConfig = {
   name: "Muhammad Daud Israr",
-  role: "AI Software Engineer",
+  role: "AI Engineer",
 
-  headline: "AI Software Engineer",
+  headline: "AI Engineer",
   subheading:
     "AI/LLM Engineer | Backend Developer — Python, FastAPI, Node.js, Express.js, JavaScript | LangChain, RAG, Claude",
 
@@ -44,7 +44,7 @@ export const site: SiteConfig = {
 
   photo: {
     src: "/daud-israr.jpeg",
-    alt: "Muhammad Daud Israr - AI Software Engineer",
+    alt: "Muhammad Daud Israr - AI Engineer",
     width: 1200,
     height: 1500,
   },
@@ -62,11 +62,10 @@ export const site: SiteConfig = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
 
   description:
-    "AI Software Engineer specialising in AI agents, LLM applications, backend engineering and production-ready APIs — built with LangChain, RAG, vector databases and modern backend architectures.",
+    "AI Engineer specialising in AI agents, LLM applications, backend engineering and production-ready APIs — built with LangChain, RAG, vector databases and modern backend architectures.",
 
   keywords: [
     "Muhammad Daud Israr",
-    "AI Software Engineer",
     "AI Engineer",
     "LLM Engineer",
     "Backend Developer",

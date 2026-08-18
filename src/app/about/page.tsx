@@ -44,7 +44,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "About — Engineering Story & Philosophy",
   description:
-    "Learn about Muhammad Daud Israr — AI Software Engineer specializing in LLM agents, RAG architectures, FastAPI, Node.js, and production-ready backend engineering.",
+    "Learn about Muhammad Daud Israr — AI Engineer specializing in LLM agents, RAG architectures, FastAPI, Node.js, and production-ready backend engineering.",
   path: "/about",
 });
 
@@ -58,7 +58,7 @@ export default function AboutPage() {
       <PageHeader
         eyebrow="Engineering Story"
         title="Software that doesn't just run — it thinks."
-        description="I am an AI Software Engineer & Backend Developer focused on building production-ready intelligent applications, RAG systems, LLM agents, and high-performance microservices."
+        description="I am an AI Engineer & Backend Developer focused on building production-ready intelligent applications, RAG systems, LLM agents, and high-performance microservices."
       />
 
       {/* Hero Biography & Portrait Section */}
