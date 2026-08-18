@@ -26,7 +26,10 @@ export function ContactForm() {
     setErrorMessage("");
 
     try {
-      if (accessKey) {
+      const isKeyConfigured =
+        accessKey && !accessKey.includes("your_") && accessKey.trim().length > 0;
+
+      if (isKeyConfigured) {
         const response = await fetch("https://api.web3forms.com/submit", {
           method: "POST",
           headers: {
@@ -34,7 +37,7 @@ export function ContactForm() {
             Accept: "application/json",
           },
           body: JSON.stringify({
-            access_key: accessKey,
+            access_key: accessKey.trim(),
             from_name: name,
             email: email,
             subject: subject || `Portfolio Inquiry from ${name}`,
@@ -48,11 +51,18 @@ export function ContactForm() {
           setStatus("success");
           return;
         } else {
-          throw new Error(result.message || "Submission failed");
+          throw new Error(result.message || "Submission failed. Please check your Web3Forms key.");
         }
       }
 
-      // Fallback: Use direct mailto protocol if API key is not yet set
+      // If no key is set yet, inform user or fallback to mailto
+      if (process.env.NODE_ENV === "development") {
+        throw new Error(
+          "Web3Forms Access Key is missing. Please paste your key into .env.local as NEXT_PUBLIC_WEB3FORMS_KEY and restart npm run dev.",
+        );
+      }
+
+      // Fallback in production if key is missing: direct mailto
       const mailtoUrl = `mailto:${site.links.email}?subject=${encodeURIComponent(
         subject || `Portfolio Contact from ${name}`,
       )}&body=${encodeURIComponent(
