@@ -187,7 +187,7 @@ function ProjectThumbnail({
   }
 
   const hasSlideshow = Boolean(
-    project.images && project.images.length > 1 && project.thumbnailFit !== "contain",
+    project.images && project.images.length > 1 && !project.disableCardSlideshow,
   );
 
   if (hasSlideshow) {
@@ -197,6 +197,7 @@ function ProjectThumbnail({
         frameClass={frame}
         sizes={sizes}
         priority={priority}
+        thumbnailFit={project.thumbnailFit}
       />
     );
   }
@@ -230,7 +231,7 @@ function ProjectThumbnail({
       ratio={null}
       className={cn(
         frame,
-        isContain && "bg-[#030712] flex items-center justify-center p-2",
+        isContain && "bg-surface-raised/50 dark:bg-neutral-950 flex items-center justify-center p-2",
       )}
     >
       <Image
@@ -286,14 +287,17 @@ function ProjectCardSlideshow({
   frameClass,
   sizes,
   priority,
+  thumbnailFit = "cover",
 }: {
   images: OptionalImageAsset[];
   frameClass: string;
   sizes: string;
   priority: boolean;
+  thumbnailFit?: "cover" | "contain";
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const isContain = thumbnailFit === "contain";
 
   useEffect(() => {
     if (isHovered || images.length <= 1) return;
@@ -311,7 +315,13 @@ function ProjectCardSlideshow({
   return (
     <CardMedia
       ratio={null}
-      className={cn(frameClass, "group/slideshow relative overflow-hidden bg-surface")}
+      className={cn(
+        frameClass,
+        "group/slideshow relative overflow-hidden",
+        isContain
+          ? "bg-surface-raised/50 dark:bg-neutral-950 flex items-center justify-center"
+          : "bg-surface",
+      )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -321,8 +331,11 @@ function ProjectCardSlideshow({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
-          className="absolute inset-0 h-full w-full"
+          transition={{ duration: 0.4, ease: "easeInOut" }}
+          className={cn(
+            "absolute inset-0 h-full w-full",
+            isContain && "flex items-center justify-center p-2",
+          )}
         >
           <Image
             src={currentImage.src}
@@ -331,7 +344,11 @@ function ProjectCardSlideshow({
             height={currentImage.height}
             priority={priority && currentIndex === 0}
             sizes={sizes}
-            className="h-full w-full object-cover transition-transform duration-[var(--duration-slow)] ease-editorial group-hover/card:scale-[1.04]"
+            className={cn(
+              "h-full w-full",
+              isContain ? "object-contain" : "object-cover",
+              "transition-transform duration-[var(--duration-slow)] ease-editorial group-hover/card:scale-[1.03]",
+            )}
           />
         </motion.div>
       </AnimatePresence>

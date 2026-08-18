@@ -71,6 +71,7 @@ export interface Project {
   links: ProjectLinks;
   thumbnail: OptionalImageAsset;
   thumbnailFit?: "cover" | "contain";
+  disableCardSlideshow?: boolean;
   images?: OptionalImageAsset[];
   video?: ProjectMediaVideo;
   featured: boolean;

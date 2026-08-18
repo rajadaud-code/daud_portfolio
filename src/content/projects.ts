@@ -111,6 +111,7 @@ export const projects: Project[] = [
       width: 1024,
       height: 599,
     },
+    thumbnailFit: "contain",
     images: [
       {
         src: "/projects/goldpulse/goldpulse-1.png",
@@ -224,6 +225,7 @@ export const projects: Project[] = [
       width: 1024,
       height: 591,
     },
+    thumbnailFit: "contain",
     images: [
       {
         src: "/projects/chex-ai/chex-ai-1.png",
@@ -350,6 +352,7 @@ export const projects: Project[] = [
       height: 450,
     },
     thumbnailFit: "contain",
+    disableCardSlideshow: true,
     images: [
       {
         src: "/projects/graphrag/graphrag-main.png",
