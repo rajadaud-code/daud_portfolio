@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Send, Sparkles } from "lucide-react";
+import { AlertCircle, Check, Send, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui";
 import { site } from "@/content";
@@ -10,16 +10,49 @@ export function ContactForm() {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
-  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const accessKey =
+    process.env.NEXT_PUBLIC_WEB3FORMS_KEY ||
+    process.env.NEXT_PUBLIC_CONTACT_KEY ||
+    "";
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !email || !message) return;
 
     setStatus("submitting");
+    setErrorMessage("");
 
-    // Construct mailto as clean reliable fallback protocol
-    setTimeout(() => {
+    try {
+      if (accessKey) {
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            access_key: accessKey,
+            from_name: name,
+            email: email,
+            subject: subject || `Portfolio Inquiry from ${name}`,
+            message: message,
+            replyto: email,
+          }),
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          setStatus("success");
+          return;
+        } else {
+          throw new Error(result.message || "Submission failed");
+        }
+      }
+
+      // Fallback: Use direct mailto protocol if API key is not yet set
       const mailtoUrl = `mailto:${site.links.email}?subject=${encodeURIComponent(
         subject || `Portfolio Contact from ${name}`,
       )}&body=${encodeURIComponent(
@@ -28,7 +61,15 @@ export function ContactForm() {
 
       window.location.href = mailtoUrl;
       setStatus("success");
-    }, 600);
+    } catch (err: unknown) {
+      console.error("Contact Form Error:", err);
+      setStatus("error");
+      setErrorMessage(
+        err instanceof Error
+          ? err.message
+          : "Failed to dispatch message. Please try again or email directly.",
+      );
+    }
   };
 
   return (
@@ -42,7 +83,7 @@ export function ContactForm() {
         </h3>
         <span className="flex items-center gap-1.5 font-mono text-xs text-accent">
           <Sparkles className="size-3.5" />
-          Quick Connect
+          Direct to Inbox
         </span>
       </div>
 
@@ -51,20 +92,33 @@ export function ContactForm() {
           <span className="flex size-12 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600">
             <Check className="size-6" />
           </span>
-          <h4 className="mt-4 text-h3 text-ink">Message Prompt Prepared!</h4>
-          <p className="mt-2 text-sm text-ink-muted max-w-xs">
-            Your default email client has been opened to dispatch your message directly.
+          <h4 className="mt-4 text-h3 text-ink">Message Sent Successfully!</h4>
+          <p className="mt-2 text-sm text-ink-muted max-w-sm">
+            Thank you for reaching out. Your message has been delivered to <strong>{site.links.email}</strong>. I will get back to you shortly.
           </p>
           <button
             type="button"
-            onClick={() => setStatus("idle")}
-            className="mt-6 font-mono text-xs text-accent underline"
+            onClick={() => {
+              setName("");
+              setEmail("");
+              setSubject("");
+              setMessage("");
+              setStatus("idle");
+            }}
+            className="mt-6 font-mono text-xs text-accent underline cursor-pointer"
           >
             Send another message
           </button>
         </div>
       ) : (
         <>
+          {status === "error" ? (
+            <div className="flex items-center gap-2 rounded-md border border-red-500/20 bg-red-500/10 p-3 text-xs text-red-600 dark:text-red-400">
+              <AlertCircle className="size-4 shrink-0" />
+              <span>{errorMessage}</span>
+            </div>
+          ) : null}
+
           <div className="grid gap-5 sm:grid-cols-2">
             <div className="flex flex-col gap-2">
               <label htmlFor="contact-name" className="font-mono text-xs uppercase text-ink-subtle">
@@ -132,9 +186,9 @@ export function ContactForm() {
             variant="primary"
             disabled={status === "submitting"}
             leadingIcon={<Send className="size-4" />}
-            className="mt-2 w-full justify-center"
+            className="mt-2 w-full justify-center cursor-pointer"
           >
-            {status === "submitting" ? "Opening Email Client..." : "Send Message"}
+            {status === "submitting" ? "Sending Message..." : "Send Message"}
           </Button>
         </>
       )}
