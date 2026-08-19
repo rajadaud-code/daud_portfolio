@@ -18,6 +18,7 @@ import Link from "next/link";
 
 import { MaskRevealText, Reveal, Stagger, StaggerItem } from "@/components/motion";
 import { CertificationCard } from "@/components/sections/certifications";
+import { ContactCta } from "@/components/sections/contact-cta";
 import { TimelineRail } from "@/components/sections/timeline-rail";
 import {
   Button,
@@ -331,45 +332,8 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      {/* Resume & Action Section */}
-      <Section spacing="tight">
-        <Container>
-          <Reveal>
-            <div className="flex flex-col items-center justify-between gap-8 rounded-card border border-line bg-surface p-8 text-center md:flex-row md:text-left md:p-12">
-              <div>
-                <h3 className="text-h2 text-ink">Let's work together.</h3>
-                <p className="mt-2 text-ink-muted max-w-prose">
-                  Interested in AI agents, backend engineering, or technical consultation? Reach out or grab a copy of my resume.
-                </p>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-4">
-                <ButtonLink
-                  href="/contact"
-                  size="lg"
-                  leadingIcon={<Mail className="size-4" />}
-                >
-                  Contact Me
-                </ButtonLink>
-
-                <CopyEmailButton size="lg" />
-
-                {site.resume.href ? (
-                  <ButtonLink
-                    href={site.resume.href}
-                    variant="ghost"
-                    size="lg"
-                    download={site.resume.filename}
-                    leadingIcon={<Download className="size-4" />}
-                  >
-                    Resume
-                  </ButtonLink>
-                ) : null}
-              </div>
-            </div>
-          </Reveal>
-        </Container>
-      </Section>
+      {/* Collaboration and Contact Call to Action */}
+      <ContactCta />
     </>
   );
 }

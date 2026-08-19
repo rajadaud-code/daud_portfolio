@@ -1,5 +1,6 @@
 import {
   Certifications,
+  ContactCta,
   Experience,
   FeaturedProjects,
   Hero,
@@ -28,6 +29,9 @@ export default function HomePage() {
       <Certifications />
 
       <Experience />
+
+      {/* Collaboration and Contact Call to Action */}
+      <ContactCta />
     </>
   );
 }
