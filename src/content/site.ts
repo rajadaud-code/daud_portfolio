@@ -10,7 +10,7 @@ export const site: SiteConfig = {
 
   headline: "AI Engineer",
   subheading:
-    "AI/LLM Engineer | Backend Developer — Python, FastAPI, Node.js, Express.js, JavaScript | LangChain, RAG, Claude",
+    "AI & Backend Engineer, Autonomous Agents, GraphRAG & Agentic Systems, Python, FastAPI & Node.js, Architecting Scalable LLM & Microservice Ecosystems",
 
   bio: [
     "I build full stack projects that don't just run—they think.",

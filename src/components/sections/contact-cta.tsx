@@ -32,22 +32,22 @@ export function ContactCta({
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-4 sm:justify-start">
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:justify-start">
               <ButtonLink
                 href="/contact"
-                size="lg"
+                size="base"
                 leadingIcon={<Mail className="size-4" />}
               >
                 Contact Me
               </ButtonLink>
 
-              <CopyEmailButton size="lg" />
+              <CopyEmailButton size="base" />
 
               {site.resume.href ? (
                 <ButtonLink
                   href={site.resume.href}
-                  variant="ghost"
-                  size="lg"
+                  variant="secondary"
+                  size="base"
                   download={site.resume.filename}
                   leadingIcon={<Download className="size-4" />}
                 >
