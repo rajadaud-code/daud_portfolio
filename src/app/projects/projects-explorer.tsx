@@ -1,10 +1,11 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
 import { Search, X } from "lucide-react";
 import { useMemo, useState } from "react";
-import { Reveal, Stagger, StaggerItem } from "@/components/motion";
+import { Reveal } from "@/components/motion";
 import { ProjectCard } from "@/components/sections/project-card";
-import { Container, Section, Tag } from "@/components/ui";
+import { Container, Section } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import type { Project, TechTag } from "@/types";
 
@@ -107,10 +108,10 @@ export function ProjectsExplorer({
                 type="button"
                 onClick={() => setSelectedCategory(null)}
                 className={cn(
-                  "rounded-pill px-3 py-1 text-xs font-medium transition-colors",
+                  "rounded-pill px-3 py-1 text-xs font-medium transition-colors cursor-pointer",
                   selectedCategory === null
                     ? "bg-ink text-ink-inverse"
-                    : "bg-canvas border border-line text-ink-muted hover:text-ink",
+                    : "bg-canvas border border-line text-ink-muted hover:text-ink hover:border-line-strong",
                 )}
               >
                 All Categories
@@ -126,10 +127,10 @@ export function ProjectsExplorer({
                     )
                   }
                   className={cn(
-                    "rounded-pill px-3 py-1 text-xs font-medium transition-colors",
+                    "rounded-pill px-3 py-1 text-xs font-medium transition-colors cursor-pointer",
                     selectedCategory === category
                       ? "bg-ink text-ink-inverse"
-                      : "bg-canvas border border-line text-ink-muted hover:text-ink",
+                      : "bg-canvas border border-line text-ink-muted hover:text-ink hover:border-line-strong",
                   )}
                 >
                   {category}
@@ -146,10 +147,10 @@ export function ProjectsExplorer({
                 type="button"
                 onClick={() => setSelectedTech(null)}
                 className={cn(
-                  "rounded-pill px-2.5 py-0.5 text-xs font-mono transition-colors",
+                  "rounded-pill px-2.5 py-1 text-xs font-mono transition-colors cursor-pointer",
                   selectedTech === null
                     ? "bg-accent text-accent-contrast"
-                    : "bg-canvas border border-line text-ink-muted hover:text-ink",
+                    : "bg-canvas border border-line text-ink-muted hover:text-ink hover:border-line-strong",
                 )}
               >
                 All Tech
@@ -163,10 +164,10 @@ export function ProjectsExplorer({
                     setSelectedTech(selectedTech === tech ? null : tech)
                   }
                   className={cn(
-                    "rounded-pill px-2.5 py-0.5 text-xs font-mono transition-colors",
+                    "rounded-pill px-2.5 py-1 text-xs font-mono transition-colors cursor-pointer",
                     selectedTech === tech
                       ? "bg-accent text-accent-contrast"
-                      : "bg-canvas border border-line text-ink-subtle hover:text-ink",
+                      : "bg-canvas border border-line text-ink-subtle hover:text-ink hover:border-line-strong",
                   )}
                 >
                   {tech}
@@ -183,7 +184,7 @@ export function ProjectsExplorer({
                 <button
                   type="button"
                   onClick={resetFilters}
-                  className="font-mono text-accent hover:underline"
+                  className="font-mono text-accent hover:underline cursor-pointer"
                 >
                   Reset all filters
                 </button>
@@ -192,19 +193,29 @@ export function ProjectsExplorer({
           </div>
         </Reveal>
 
-        {/* Projects Grid */}
+        {/* Projects Grid with Smooth Animated Transitions */}
         {filteredProjects.length > 0 ? (
-          <Stagger
-            as="ul"
+          <motion.ul
+            key="projects-grid"
             role="list"
+            layout
             className="mt-stack grid list-none gap-6 p-0 md:grid-cols-2"
           >
-            {filteredProjects.map((project, index) => (
-              <StaggerItem as="li" key={project.slug}>
-                <ProjectCard project={project} index={index + 1} />
-              </StaggerItem>
-            ))}
-          </Stagger>
+            <AnimatePresence mode="popLayout">
+              {filteredProjects.map((project, index) => (
+                <motion.li
+                  key={project.slug}
+                  layout
+                  initial={{ opacity: 0, scale: 0.97, y: 16 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.97, y: -16 }}
+                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <ProjectCard project={project} index={index + 1} />
+                </motion.li>
+              ))}
+            </AnimatePresence>
+          </motion.ul>
         ) : (
           <Reveal trigger="mount" delay={0.1}>
             <div className="mt-stack flex min-h-64 flex-col items-center justify-center rounded-card border border-dashed border-line p-12 text-center">
@@ -215,7 +226,7 @@ export function ProjectsExplorer({
               <button
                 type="button"
                 onClick={resetFilters}
-                className="mt-6 rounded-control bg-ink px-4 py-2 text-sm font-medium text-ink-inverse"
+                className="mt-6 rounded-control bg-ink px-4 py-2 text-sm font-medium text-ink-inverse cursor-pointer"
               >
                 Reset Filters
               </button>
