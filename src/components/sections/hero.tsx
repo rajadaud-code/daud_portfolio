@@ -7,12 +7,11 @@ import { site } from "@/content";
 import { cn } from "@/lib/utils";
 
 const TIMELINE = {
-  eyebrow: 0.1,
-  headline: 0.22,
+  headline: 0.15,
   headlineStagger: 0.18,
-  subheading: 0.8,
-  actions: 0.95,
-  photo: 0.4,
+  subheading: 0.6,
+  actions: 0.8,
+  photo: 0.3,
 } as const;
 
 export function Hero() {
@@ -31,15 +30,9 @@ export function Hero() {
           )}
         >
           <div className="flex flex-col">
-            <Reveal trigger="mount" delay={TIMELINE.eyebrow} distance={8}>
-              <p className="font-mono text-label uppercase text-ink-subtle">
-                {site.name}
-              </p>
-            </Reveal>
-
             <h1
               id="hero-heading"
-              className="mt-6 text-display text-ink md:mt-8"
+              className="text-display text-ink"
             >
               <MaskRevealText
                 text={site.headline}

@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *, .dark, .dark *));
+
 /* ============================================================================
    LAYER 1 — RAW PALETTE
    Primitive values. Never referenced by components directly; only the semantic
@@ -39,6 +41,7 @@
   --surface-raised: var(--neutral-100);
 
   --ink: var(--neutral-950);
+  --ink-hover: var(--neutral-800);
   --ink-muted: var(--neutral-600);
   --ink-subtle: var(--neutral-500);
   --ink-inverse: var(--neutral-0);
@@ -104,6 +107,7 @@
   --surface-raised: #1c1c21;
 
   --ink: #f4f4f5;
+  --ink-hover: #e4e4e7;
   --ink-muted: #a1a1aa;
   --ink-subtle: #71717a;
   --ink-inverse: #09090b;
@@ -134,6 +138,7 @@
   --color-surface-raised: var(--surface-raised);
 
   --color-ink: var(--ink);
+  --color-ink-hover: var(--ink-hover);
   --color-ink-muted: var(--ink-muted);
   --color-ink-subtle: var(--ink-subtle);
   --color-ink-inverse: var(--ink-inverse);

@@ -34,7 +34,7 @@ export const buttonVariants = cva(
          *  the PRD allows one blue, and spending it on every button is how a
          *  minimal palette turns loud. Blue stays for links and focus. */
         primary:
-          "bg-ink text-ink-inverse shadow-hairline hover:bg-neutral-800 hover:shadow-card",
+          "bg-ink text-ink-inverse shadow-hairline hover:bg-ink-hover hover:shadow-card",
         /** Equal weight, lower urgency. Hairline border, the house idiom. */
         secondary:
           "border border-line bg-canvas text-ink hover:border-line-strong hover:bg-surface",
