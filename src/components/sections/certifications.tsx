@@ -26,7 +26,7 @@ export function Certifications() {
   if (certifications.length === 0 && shortfall === 0) return null;
 
   return (
-    <Section id={SECTION_ID}>
+    <Section id={SECTION_ID} spacing="tight">
       <Container>
         <Reveal>
           <SectionHeader

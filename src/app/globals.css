@@ -229,9 +229,9 @@
      (block, flex, grid, table). `gutter`, `stack` and `section` are safe;
      `.inline-gutter` and friends collide with nothing.
      ---------------------------------------------------------------------- */
-  --spacing-gutter: clamp(1.5rem, 5vw, 4rem);
-  --spacing-stack: clamp(2.5rem, 6vw, 5rem);
-  --spacing-section: clamp(6rem, 12vw, 11rem);
+  --spacing-gutter: clamp(1rem, 3.5vw, 2.75rem);
+  --spacing-stack: clamp(1.5rem, 3vw, 2.5rem);
+  --spacing-section: clamp(2.5rem, 4.5vw, 4.5rem);
 
   /* max-w-page (full editorial width) / max-w-prose-editorial (reading measure) */
   --container-page: 90rem;

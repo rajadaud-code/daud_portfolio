@@ -20,7 +20,7 @@ export function Hero() {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="pt-2 pb-stack md:pt-24 lg:pt-4"
+      className="pt-6 pb-stack sm:pt-10 md:pt-14 lg:pt-12"
     >
       <Container>
         <div

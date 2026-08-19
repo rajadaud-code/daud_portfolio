@@ -50,7 +50,7 @@ export function Experience() {
   if (entries.length === 0) return null;
 
   return (
-    <Section id={SECTION_ID}>
+    <Section id={SECTION_ID} spacing="tight">
       <Container>
         <Reveal>
           <SectionHeader

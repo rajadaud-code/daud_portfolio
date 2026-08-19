@@ -32,7 +32,7 @@ export default function ContactPage() {
         description="Whether you have an upcoming AI project, require scalable backend architecture, or want to discuss LLM agents and RAG implementations, I'd love to connect."
       />
 
-      <Section spacing="tight" className="pb-24">
+      <Section spacing="tight">
         <Container>
           <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
             {/* Contact Information & Channels */}

@@ -217,7 +217,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
       {/* Case Study Content Sections */}
       {caseStudy ? (
-        <div className="mt-16 space-y-16 md:space-y-24">
+        <div className="mt-8">
           {/* Section 1: Problem & Approach */}
           <Section spacing="tight">
             <Container>

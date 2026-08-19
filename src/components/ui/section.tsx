@@ -6,30 +6,20 @@ import { cn } from "@/lib/utils";
 export const sectionVariants = cva("", {
   variants: {
     /**
-     * Vertical rhythm. Two options, and the second exists for exactly one
-     * situation — see `tight`.
+     * Vertical rhythm. Provides proportional spacing across mobile and desktop.
      */
     spacing: {
-      /** The house rhythm. Every section that follows another section. */
+      /** The house rhythm for standalone sections. */
       default: "py-section",
       /**
-       * Reduced top padding, full bottom. For a section that directly follows
-       * a block which already spaced itself — currently only the featured
-       * projects grid, which sits under the hero's own `pb-stack`.
-       *
-       * Two paddings stacked is one gap, not two, and at `py-section`'s upper
-       * clamp (11rem) the sum would push the grid a full screen below the fold.
-       * The PRD asks twice for projects after minimal scroll; this is the other
-       * half of that promise, the first half being the hero's content-driven
-       * height (see sections/hero.tsx).
-       *
-       * A variant rather than a `className="pt-stack"` override at the call
-       * site: `py-*` and `pt-*` are different tailwind-merge groups, so both
-       * would survive the merge and the winner would be decided by Tailwind's
-       * emitted property order — which is not a contract worth depending on.
-       * cva picks one string, so there is nothing to resolve.
+       * Reduced top padding, standard bottom. Ideal for sections immediately
+       * following hero, headers, or previous sections.
        */
-      tight: "pt-stack pb-section",
+      tight: "pt-2 pb-section sm:pt-4",
+      /** Compact vertical spacing for related modules */
+      compact: "py-stack",
+      /** Completely chromeless / zero padding */
+      none: "py-0",
     },
   },
   defaultVariants: { spacing: "default" },

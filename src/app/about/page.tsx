@@ -160,7 +160,7 @@ export default function AboutPage() {
       </Section>
 
       {/* Engineering Philosophy Section */}
-      <Section spacing="tight" className="mt-16">
+      <Section spacing="tight">
         <Container>
           <Reveal>
             <SectionHeader
@@ -209,7 +209,7 @@ export default function AboutPage() {
       </Section>
 
       {/* Technical Ecosystem & Skills Matrix Section */}
-      <Section spacing="tight" className="mt-16">
+      <Section spacing="tight">
         <Container>
           <Reveal>
             <SectionHeader
@@ -247,7 +247,7 @@ export default function AboutPage() {
       </Section>
 
       {/* Experience & Timeline Section */}
-      <Section spacing="tight" className="mt-16">
+      <Section spacing="tight">
         <Container>
           <Reveal>
             <SectionHeader
@@ -311,7 +311,7 @@ export default function AboutPage() {
       </Section>
 
       {/* Certifications Highlight */}
-      <Section spacing="tight" className="mt-16">
+      <Section spacing="tight">
         <Container>
           <Reveal>
             <SectionHeader
@@ -332,7 +332,7 @@ export default function AboutPage() {
       </Section>
 
       {/* Resume & Action Section */}
-      <Section spacing="tight" className="mt-16 mb-16">
+      <Section spacing="tight">
         <Container>
           <Reveal>
             <div className="flex flex-col items-center justify-between gap-8 rounded-card border border-line bg-surface p-8 text-center md:flex-row md:text-left md:p-12">
