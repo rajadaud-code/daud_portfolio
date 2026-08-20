@@ -353,6 +353,12 @@ export const projects: Project[] = [
     },
     thumbnailFit: "contain",
     disableCardSlideshow: true,
+    video: {
+      src: "/projects/graphrag/graphrag-demo.mp4",
+      poster: "/projects/graphrag/graphrag-main.png",
+      alt: "Enterprise GraphRAG Intelligence Engine Live Demo Video",
+      badge: "GraphRAG Live Demo",
+    },
     images: [
       {
         src: "/projects/graphrag/graphrag-main.png",

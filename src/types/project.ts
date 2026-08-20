@@ -60,6 +60,7 @@ export interface ProjectMediaVideo {
   src: string;
   poster?: string;
   alt?: string;
+  badge?: string;
 }
 
 export interface Project {
