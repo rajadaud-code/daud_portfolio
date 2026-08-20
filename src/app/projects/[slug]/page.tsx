@@ -26,6 +26,7 @@ import {
 } from "@/components/ui";
 import { getAllProjects, getProjectBySlug } from "@/content";
 import { buildMetadata } from "@/lib/seo";
+import { cn } from "@/lib/utils";
 
 interface CaseStudyPageProps {
   params: Promise<{ slug: string }>;
@@ -208,7 +209,12 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 width={project.thumbnail.width}
                 height={project.thumbnail.height}
                 priority
-                className="w-full object-cover"
+                className={cn(
+                  "w-full",
+                  project.thumbnailFit === "contain"
+                    ? "object-contain bg-surface-raised/50 dark:bg-neutral-950 p-2 md:p-4"
+                    : "object-cover",
+                )}
               />
             </div>
           </Reveal>

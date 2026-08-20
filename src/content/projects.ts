@@ -18,9 +18,10 @@ export const projects: Project[] = [
     thumbnail: {
       src: "/projects/ai-expense-management-system.png",
       alt: "Sign-in page of the AI Expense Management System, beside a collage of its dashboard cards — balances, budgets, and AI spending insights.",
-      width: 1600,
-      height: 1000,
+      width: 1024,
+      height: 456,
     },
+    thumbnailFit: "contain",
     featured: true,
     order: 1,
     caseStudy: {
